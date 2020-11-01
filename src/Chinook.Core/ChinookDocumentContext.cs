@@ -9,6 +9,11 @@ namespace Chinook.Core
 {
     public class ChinookDocumentContext : DocumentContext
     {
+        public ChinookDocumentContext()
+        {
+
+        }
+
         public ChinookDocumentContext(Uri currentRequestUri)
         {
             var urlBuilderConfiguration = CreateUrlBuilderConfiguration(currentRequestUri);

@@ -1,10 +1,12 @@
 ﻿using Chinook.Core;
+using Chinook.Core.Constants;
+using Chinook.Core.Extensions;
 using Chinook.Core.ServiceModels;
+using JsonApiFramework.Http;
 using JsonApiFramework.JsonApi;
+using JsonApiFramework.Server;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace Chinook.Web.Resources
@@ -27,8 +29,13 @@ namespace Chinook.Web.Resources
                 Message = "Hello World"
             };
 
-            var displayUri = httpContextAccessor.HttpContext.Request.GetDisplayUrl();
-            var currentRequestUri = new Uri(displayUri);
+            var currentRequestUri = httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            var scheme = currentRequestUri.Scheme;
+            var host = currentRequestUri.Host;
+            var port = currentRequestUri.Port;
+            var urlBuilderConfiguration = new UrlBuilderConfiguration(scheme, host, port);
+            var customersResourceCollectionLink = CreateCustomerResourceCollectionLink(urlBuilderConfiguration);
 
             using var chinookDocumentContext = new ChinookDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -38,11 +45,22 @@ namespace Chinook.Web.Resources
                                 .AddSelfLink()
                             .LinksEnd()
                             .Resource(homeResource)
+                                .Links()
+                                    .AddLink(CustomerResourceKeyWords.Self, customersResourceCollectionLink)
+                                 .LinksEnd()
                             .ResourceEnd()
                         .WriteDocument();
 
             return Task.FromResult(document);
         }
-    }
+
+        private Link CreateCustomerResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var customersResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                       .Path(CustomerResourceKeyWords.Self)
+                                                       .Build();
+            
+            return new Link(customersResourceCollectionLink);
+        }
     }
 }

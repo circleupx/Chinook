@@ -11,6 +11,7 @@ namespace Chinook.Core.ServiceModels
         {
             var serviceModelBuilder = new ServiceModelBuilder();
             serviceModelBuilder.Configurations.Add(new HomeServiceModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new CustomerServiceModelConfiguration());
             serviceModelBuilder.HomeResource<HomeServiceModel>();
 
             var createConventions = CreateConventions();
