@@ -1,11 +1,12 @@
 using Chinook.Infrastructure.Database;
+using Chinook.Infrastructure.Handlers;
 using Chinook.Web.Middlewares;
 using Chinook.Web.Resources;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Chinook
 {
@@ -22,7 +23,10 @@ namespace Chinook
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<HomeResource>();
+            services.AddTransient<ICustomerResource, CustomerResource>();
             services.AddDbContext<ChinookDbContext>();
+
+            services.AddMediatR(typeof(GetCustomerResourceCollectionHandler));
             services.AddHttpContextAccessor();
             services.AddControllers()
                 .AddNewtonsoftJson();

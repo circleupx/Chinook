@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chinook.Core.EntityConfiguration
 {
-    class TrackEntityTypeConfiguration : IEntityTypeConfiguration<TrackServiceModel>
+    class TrackEntityTypeConfiguration : IEntityTypeConfiguration<Track>
     {
-        public void Configure(EntityTypeBuilder<TrackServiceModel> entityTypeBuilder)
+        public void Configure(EntityTypeBuilder<Track> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(e => e.TrackId);
 

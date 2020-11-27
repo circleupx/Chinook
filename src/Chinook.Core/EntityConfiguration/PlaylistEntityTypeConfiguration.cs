@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chinook.Core.EntityConfiguration
 {
-    class PlaylistEntityTypeConfiguration : IEntityTypeConfiguration<PlaylistServiceModel>
+    class PlaylistEntityTypeConfiguration : IEntityTypeConfiguration<Playlist>
     {
-        public void Configure(EntityTypeBuilder<PlaylistServiceModel> entityTypeBuilder)
+        public void Configure(EntityTypeBuilder<Playlist> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(e => e.PlaylistId);
 

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chinook.Core.EntityConfiguration
 {
-    class GenreEntityTypeConfiguration : IEntityTypeConfiguration<GenreServiceModel>
+    class GenreEntityTypeConfiguration : IEntityTypeConfiguration<Genre>
     {
-        public void Configure(EntityTypeBuilder<GenreServiceModel> entityTypeBuilder)
+        public void Configure(EntityTypeBuilder<Genre> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(e => e.GenreId);
 

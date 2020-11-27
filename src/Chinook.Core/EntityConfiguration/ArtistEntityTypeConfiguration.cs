@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chinook.Core.EntityConfiguration
 {
-    class ArtistEntityTypeConfiguration : IEntityTypeConfiguration<ArtistServiceModel>
+    class ArtistEntityTypeConfiguration : IEntityTypeConfiguration<Artist>
     {
-        public void Configure(EntityTypeBuilder<ArtistServiceModel> entityTypeBuilder)
+        public void Configure(EntityTypeBuilder<Artist> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(e => e.ArtistId);
 

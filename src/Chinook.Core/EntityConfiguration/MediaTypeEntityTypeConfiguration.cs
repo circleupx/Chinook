@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chinook.Core.EntityConfiguration
 {
-    class MediaTypeEntityTypeConfiguration : IEntityTypeConfiguration<MediaTypeServiceModel>
+    class MediaTypeEntityTypeConfiguration : IEntityTypeConfiguration<MediaType>
     {
-        public void Configure(EntityTypeBuilder<MediaTypeServiceModel> entityTypeBuilder)
+        public void Configure(EntityTypeBuilder<MediaType> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(e => e.MediaTypeId);
 

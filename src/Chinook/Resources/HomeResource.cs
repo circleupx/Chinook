@@ -13,23 +13,23 @@ namespace Chinook.Web.Resources
 {
     public class HomeResource
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly ILogger<HomeResource> logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger<HomeResource> _logger;
 
         public HomeResource(IHttpContextAccessor httpContextAccessor, ILogger<HomeResource> logger)
         {
-            this.httpContextAccessor = httpContextAccessor;
-            this.logger = logger;
+            _httpContextAccessor = httpContextAccessor;
+            _logger = logger;
         }
 
         public Task<Document> GetHomeDocument()
         {
-            var homeResource = new HomeServiceModel
+            var homeResource = new Home
             {
                 Message = "Hello World"
             };
 
-            var currentRequestUri = httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
 
             var scheme = currentRequestUri.Scheme;
             var host = currentRequestUri.Host;
@@ -50,11 +50,11 @@ namespace Chinook.Web.Resources
                                  .LinksEnd()
                             .ResourceEnd()
                         .WriteDocument();
-
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
             return Task.FromResult(document);
         }
 
-        private Link CreateCustomerResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        private static Link CreateCustomerResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
         {
             var customersResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
                                                        .Path(CustomerResourceKeyWords.Self)

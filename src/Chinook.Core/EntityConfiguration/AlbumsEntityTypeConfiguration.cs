@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chinook.Core.EntityConfiguration
 {
-    class AlbumsEntityTypeConfiguration : IEntityTypeConfiguration<AlbumServiceModel>
+    class AlbumsEntityTypeConfiguration : IEntityTypeConfiguration<Album>
     {
-        public void Configure(EntityTypeBuilder<AlbumServiceModel> entityTypeBuilder)
+        public void Configure(EntityTypeBuilder<Album> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(e => e.AlbumId);
 

@@ -2,11 +2,11 @@
 
 namespace Chinook.Core.ServiceModels
 {
-    public partial class CustomerServiceModel
+    public partial class Customer
     {
-        public CustomerServiceModel()
+        public Customer()
         {
-            Invoices = new HashSet<InvoiceServiceModel>();
+            Invoices = new HashSet<Invoice>();
         }
 
         public long CustomerId { get; set; }
@@ -23,7 +23,7 @@ namespace Chinook.Core.ServiceModels
         public string Email { get; set; }
         public long? SupportRepId { get; set; }
 
-        public virtual EmployeeServiceModel SupportRep { get; set; }
-        public virtual ICollection<InvoiceServiceModel> Invoices { get; set; }
+        public virtual Employee SupportRep { get; set; }
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

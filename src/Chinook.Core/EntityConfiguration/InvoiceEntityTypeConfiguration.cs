@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chinook.Core.EntityConfiguration
 {
-    class InvoiceEntityTypeConfiguration : IEntityTypeConfiguration<InvoiceServiceModel>
+    class InvoiceEntityTypeConfiguration : IEntityTypeConfiguration<Invoice>
     {
-        public void Configure(EntityTypeBuilder<InvoiceServiceModel> entityTypeBuilder)
+        public void Configure(EntityTypeBuilder<Invoice> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(e => e.InvoiceId);
 

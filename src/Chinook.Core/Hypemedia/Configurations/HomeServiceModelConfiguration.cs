@@ -3,7 +3,7 @@ using JsonApiFramework.ServiceModel.Configuration;
 
 namespace Chinook.Core.Hypemedia.Configurations
 {
-    class HomeServiceModelConfiguration : ResourceTypeBuilder<HomeServiceModel>
+    class HomeServiceModelConfiguration : ResourceTypeBuilder<Home>
     {
         private const string JsonApiType = "home";
 

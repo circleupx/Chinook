@@ -1,6 +1,5 @@
 ﻿using Chinook.Web.Resources;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace Chinook.Web.Controllers
@@ -8,12 +7,10 @@ namespace Chinook.Web.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
-        private readonly ILogger logger;
         private readonly HomeResource homeResource;
-
-        public HomeController(ILogger<HomeController> logger, HomeResource homeResource)
+        
+        public HomeController( HomeResource homeResource)
         {
-            this.logger = logger;
             this.homeResource = homeResource;
         }
 

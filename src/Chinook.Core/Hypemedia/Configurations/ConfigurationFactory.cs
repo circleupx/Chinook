@@ -1,9 +1,9 @@
-﻿using Chinook.Core.Hypemedia.Configurations;
+﻿using Chinook.Core.ServiceModels;
 using JsonApiFramework.Conventions;
 using JsonApiFramework.ServiceModel;
 using JsonApiFramework.ServiceModel.Configuration;
 
-namespace Chinook.Core.ServiceModels
+namespace Chinook.Core.Hypemedia.Configurations
 {
     public static class ConfigurationFactory
     {
@@ -12,7 +12,7 @@ namespace Chinook.Core.ServiceModels
             var serviceModelBuilder = new ServiceModelBuilder();
             serviceModelBuilder.Configurations.Add(new HomeServiceModelConfiguration());
             serviceModelBuilder.Configurations.Add(new CustomerServiceModelConfiguration());
-            serviceModelBuilder.HomeResource<HomeServiceModel>();
+            serviceModelBuilder.HomeResource<Home>();
 
             var createConventions = CreateConventions();
             var serviceModel = serviceModelBuilder.Create(createConventions);
@@ -22,7 +22,7 @@ namespace Chinook.Core.ServiceModels
         public static IConventions CreateConventions()
         {
             var conventionsBuilder = new ConventionsBuilder();
-            
+
             conventionsBuilder.ApiAttributeNamingConventions()
                               .AddStandardMemberNamingConvention();
 

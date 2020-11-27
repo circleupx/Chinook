@@ -8,9 +8,4 @@
     <ProjectReference Include="..\Chinook.Core\Chinook.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Database\Commands\" />
-    <Folder Include="Database\Queries\" />
-  </ItemGroup>
-
 </Project>

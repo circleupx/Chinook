@@ -1,6 +1,6 @@
 ﻿namespace Chinook.Core.ServiceModels
 {
-    public class HomeServiceModel
+    public class Home
     {
         public string Message { get; set; }
     }
