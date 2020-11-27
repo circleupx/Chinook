@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinook.Web", "Chinook\Chinook.Web.csproj", "{164CC135-B6EC-4BA6-8259-474739F8A3E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinook.Web", "Chinook\Chinook.Web.csproj", "{164CC135-B6EC-4BA6-8259-474739F8A3E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinook.Core", "Chinook.Core\Chinook.Core.csproj", "{6431CAA1-9321-41B7-A148-683AFEEEEDA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinook.Core", "Chinook.Core\Chinook.Core.csproj", "{6431CAA1-9321-41B7-A148-683AFEEEEDA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinook.Infrastructure", "Chinook.Infrastructure\Chinook.Infrastructure.csproj", "{A2EE8470-7B61-4AA2-95B6-635B988827D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinook.Infrastructure", "Chinook.Infrastructure\Chinook.Infrastructure.csproj", "{A2EE8470-7B61-4AA2-95B6-635B988827D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Test", "Unit Test", "{3192D5D8-43FF-4971-A4A8-EE309F9982AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinook.Core.UnitTest", "..\test\Chinook.Core.Test\Chinook.Core.UnitTest.csproj", "{A175DAC0-BEC5-4C51-9664-B2565B416F3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinook.Web.UnitTest", "..\test\Chinook.Web.Test\Chinook.Web.UnitTest.csproj", "{5C15551D-1314-4DC8-BF08-5977C182EF2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +33,21 @@ Global
 		{A2EE8470-7B61-4AA2-95B6-635B988827D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2EE8470-7B61-4AA2-95B6-635B988827D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2EE8470-7B61-4AA2-95B6-635B988827D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A175DAC0-BEC5-4C51-9664-B2565B416F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A175DAC0-BEC5-4C51-9664-B2565B416F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A175DAC0-BEC5-4C51-9664-B2565B416F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A175DAC0-BEC5-4C51-9664-B2565B416F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C15551D-1314-4DC8-BF08-5977C182EF2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C15551D-1314-4DC8-BF08-5977C182EF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C15551D-1314-4DC8-BF08-5977C182EF2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C15551D-1314-4DC8-BF08-5977C182EF2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A175DAC0-BEC5-4C51-9664-B2565B416F3F} = {3192D5D8-43FF-4971-A4A8-EE309F9982AE}
+		{5C15551D-1314-4DC8-BF08-5977C182EF2D} = {3192D5D8-43FF-4971-A4A8-EE309F9982AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0F00824-379F-4A2E-A8C0-9144E3A004E8}

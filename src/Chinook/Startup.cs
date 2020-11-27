@@ -1,4 +1,4 @@
-using Chinook.Core;
+using Chinook.Infrastructure.Database;
 using Chinook.Web.Middlewares;
 using Chinook.Web.Resources;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +22,7 @@ namespace Chinook
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<HomeResource>();
-            services.AddDbContext<ChinookContext>();
+            services.AddDbContext<ChinookDbContext>();
             services.AddHttpContextAccessor();
             services.AddControllers()
                 .AddNewtonsoftJson();

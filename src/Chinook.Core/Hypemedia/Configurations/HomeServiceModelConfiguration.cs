@@ -1,6 +1,7 @@
-﻿using JsonApiFramework.ServiceModel.Configuration;
+﻿using Chinook.Core.ServiceModels;
+using JsonApiFramework.ServiceModel.Configuration;
 
-namespace Chinook.Core.ServiceModels.Configurations
+namespace Chinook.Core.Hypemedia.Configurations
 {
     class HomeServiceModelConfiguration : ResourceTypeBuilder<HomeServiceModel>
     {

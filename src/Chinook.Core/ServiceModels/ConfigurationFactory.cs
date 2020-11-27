@@ -1,4 +1,4 @@
-﻿using Chinook.Core.ServiceModels.Configurations;
+﻿using Chinook.Core.Hypemedia.Configurations;
 using JsonApiFramework.Conventions;
 using JsonApiFramework.ServiceModel;
 using JsonApiFramework.ServiceModel.Configuration;

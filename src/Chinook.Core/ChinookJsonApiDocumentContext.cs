@@ -7,20 +7,20 @@ using System;
 
 namespace Chinook.Core
 {
-    public class ChinookDocumentContext : DocumentContext
+    public class ChinookJsonApiDocumentContext : DocumentContext
     {
-        public ChinookDocumentContext()
+        public ChinookJsonApiDocumentContext()
         {
 
         }
 
-        public ChinookDocumentContext(Uri currentRequestUri)
+        public ChinookJsonApiDocumentContext(Uri currentRequestUri)
         {
             var urlBuilderConfiguration = CreateUrlBuilderConfiguration(currentRequestUri);
             UrlBuilderConfiguration = urlBuilderConfiguration;
         }
 
-        public ChinookDocumentContext(Uri currentRequestUri, Document document) : base(document)
+        public ChinookJsonApiDocumentContext(Uri currentRequestUri, Document document) : base(document)
         {
             var urlBuilderConfiguration = CreateUrlBuilderConfiguration(currentRequestUri);
             UrlBuilderConfiguration = urlBuilderConfiguration;

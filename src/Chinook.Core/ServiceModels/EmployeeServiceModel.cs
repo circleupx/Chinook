@@ -2,12 +2,12 @@
 
 namespace Chinook.Core.ServiceModels
 {
-    public partial class Employees
+    public partial class EmployeeServiceModel
     {
-        public Employees()
+        public EmployeeServiceModel()
         {
-            Customers = new HashSet<Customers>();
-            InverseReportsToNavigation = new HashSet<Employees>();
+            Customers = new HashSet<CustomerServiceModel>();
+            InverseReportsToNavigation = new HashSet<EmployeeServiceModel>();
         }
 
         public long EmployeeId { get; set; }
@@ -26,8 +26,8 @@ namespace Chinook.Core.ServiceModels
         public string Fax { get; set; }
         public string Email { get; set; }
 
-        public virtual Employees ReportsToNavigation { get; set; }
-        public virtual ICollection<Customers> Customers { get; set; }
-        public virtual ICollection<Employees> InverseReportsToNavigation { get; set; }
+        public virtual EmployeeServiceModel ReportsToNavigation { get; set; }
+        public virtual ICollection<CustomerServiceModel> Customers { get; set; }
+        public virtual ICollection<EmployeeServiceModel> InverseReportsToNavigation { get; set; }
     }
 }

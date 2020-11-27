@@ -1,6 +1,7 @@
 ﻿using Chinook.Core;
 using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
+using Chinook.Infrastructure.Database;
 using JsonApiFramework.JsonApi;
 using JsonApiFramework.Server;
 using Microsoft.AspNetCore.Http;
@@ -15,10 +16,10 @@ namespace Chinook.Web.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
-        private readonly ChinookContext _chinookContext;
+        private readonly ChinookDbContext _chinookContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CustomerController(ILogger<CustomerController> logger, ChinookContext chinookContext, IHttpContextAccessor httpContextAccessor)
+        public CustomerController(ILogger<CustomerController> logger, ChinookDbContext chinookContext, IHttpContextAccessor httpContextAccessor)
         {
            _logger = logger;
            _chinookContext = chinookContext;
@@ -31,7 +32,7 @@ namespace Chinook.Web.Controllers
             var customerResourceCollection = await _chinookContext.Customers.ToListAsync();
             var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
 
-            using var chinookDocumentContext = new ChinookDocumentContext(currentRequestUri);
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
                 .NewDocument(currentRequestUri)
                 .SetJsonApiVersion(JsonApiVersion.Version10)

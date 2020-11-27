@@ -37,7 +37,7 @@ namespace Chinook.Web.Resources
             var urlBuilderConfiguration = new UrlBuilderConfiguration(scheme, host, port);
             var customersResourceCollectionLink = CreateCustomerResourceCollectionLink(urlBuilderConfiguration);
 
-            using var chinookDocumentContext = new ChinookDocumentContext(currentRequestUri);
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
                         .NewDocument(currentRequestUri)
                             .SetJsonApiVersion(JsonApiVersion.Version10)

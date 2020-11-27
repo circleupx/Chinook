@@ -17,13 +17,11 @@ namespace Chinook.Web.Controllers
             this.homeResource = homeResource;
         }
 
-
         [Route("")]
         public async Task<IActionResult> GetHomeResource()
         {
             var homeDocument = await homeResource.GetHomeDocument();
             return Ok(homeDocument);
         }
-
     }
 }
