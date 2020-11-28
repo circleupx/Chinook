@@ -16,6 +16,9 @@ namespace Chinook.Core.HypemediaConfiguration
             serviceModelBuilder.Configurations.Add(new ArtistServiceModelConfiguration());
             serviceModelBuilder.Configurations.Add(new EmployeeServiceModelConfiguration());
             serviceModelBuilder.Configurations.Add(new GenreServiceModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new InvoiceServiceModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new InvoiceItemServiceModelConfiguration());
+
             serviceModelBuilder.HomeResource<Home>();
 
             var createConventions = CreateConventions();

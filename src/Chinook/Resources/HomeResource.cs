@@ -40,6 +40,8 @@ namespace Chinook.Web.Resources
             var artistResourceCollectionLink = CreateArtistResourceCollectionLink(urlBuilderConfiguration);
             var employeeResourceCollectionLink = CreateEmployeeResourceCollectionLink(urlBuilderConfiguration);
             var genreResourceCollectionLink = CreateGenreResourceCollectionLink(urlBuilderConfiguration);
+            var invoiceResourceCollectionLink = CreateInvoiceResourceCollectionLink(urlBuilderConfiguration);
+            var invoiceItemResourceCollectionLink = CreateInvoiceItemResourceCollectionLink(urlBuilderConfiguration);
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -55,11 +57,31 @@ namespace Chinook.Web.Resources
                                     .AddLink(ArtistResourceKeyWords.Self, artistResourceCollectionLink)
                                     .AddLink(EmployeeResourceKeyWords.Self, employeeResourceCollectionLink)
                                     .AddLink(GenreResourceKeyWords.Self, genreResourceCollectionLink)
+                                    .AddLink(InvoiceResourceKeyWords.Self, invoiceResourceCollectionLink)
+                                    .AddLink(InvoiceItemResourceKeyWords.Self, invoiceItemResourceCollectionLink)
                                  .LinksEnd()
                             .ResourceEnd()
                         .WriteDocument();
             _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
             return Task.FromResult(document);
+        }
+
+        private static Link CreateInvoiceItemResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var invoiceItemResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                     .Path(InvoiceItemResourceKeyWords.Self)
+                                                     .Build();
+
+            return new Link(invoiceItemResourceCollectionLink);
+        }
+
+        private static Link CreateInvoiceResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var invoiceResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                     .Path(InvoiceResourceKeyWords.Self)
+                                                     .Build();
+
+            return new Link(invoiceResourceCollectionLink);
         }
 
         private static Link CreateCustomerResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)

@@ -25,6 +25,8 @@ namespace Chinook
         {
             services.AddSingleton<HomeResource>();
 
+            services.AddTransient<IInvoiceItemResource, InvoiceItemResource>();
+            services.AddTransient<IInvoiceResource, InvoiceResource>();
             services.AddTransient<IGenerResource, GenreResource>();
             services.AddTransient<IEmployeeResource, EmployeeResource>();
             services.AddTransient<IArtistResource, ArtistResource>();

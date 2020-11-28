@@ -1,5 +1,6 @@
 ﻿using Chinook.Core.ServiceModels;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Chinook.Infrastructure.Database
 {
@@ -31,7 +32,8 @@ namespace Chinook.Infrastructure.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite("DataSource=C:\\Users\\Yunier\\Downloads\\chinook\\chinook.db");
+                var chinookSQLiteConnectionString = $"DataSource={AppContext.BaseDirectory}chinook.db";
+                optionsBuilder.UseSqlite(chinookSQLiteConnectionString);
             }
         }
 
