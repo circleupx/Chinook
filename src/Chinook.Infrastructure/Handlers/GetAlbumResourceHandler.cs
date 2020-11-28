@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Chinook.Infrastructure.Handlers
 {
-    public class GetCustomerResourceHandler : IRequestHandler<GetCustomerResourceCommand, Customer>
+    public class GetAlbumResourceHandler : IRequestHandler<GetAlbumResourceCommand, Album>
     {
         private readonly ChinookDbContext _chinookDbContext;
 
-        public GetCustomerResourceHandler(ChinookDbContext chinookDbContext)
+        public GetAlbumResourceHandler(ChinookDbContext chinookDbContext)
         {
             _chinookDbContext = chinookDbContext;
         }
 
-        public async Task<Customer> Handle(GetCustomerResourceCommand request, CancellationToken cancellationToken)
+        public async Task<Album> Handle(GetAlbumResourceCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Customers.FirstOrDefaultAsync(c=>c.CustomerId == request.ResourceId, cancellationToken);
+            return await _chinookDbContext.Albums.FirstOrDefaultAsync(a => a.AlbumId == request.ResourceId, cancellationToken);
         }
     }
 }

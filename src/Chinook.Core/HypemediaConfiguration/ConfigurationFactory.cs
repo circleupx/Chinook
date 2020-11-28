@@ -3,7 +3,7 @@ using JsonApiFramework.Conventions;
 using JsonApiFramework.ServiceModel;
 using JsonApiFramework.ServiceModel.Configuration;
 
-namespace Chinook.Core.Hypemedia.Configurations
+namespace Chinook.Core.HypemediaConfiguration
 {
     public static class ConfigurationFactory
     {
@@ -12,6 +12,10 @@ namespace Chinook.Core.Hypemedia.Configurations
             var serviceModelBuilder = new ServiceModelBuilder();
             serviceModelBuilder.Configurations.Add(new HomeServiceModelConfiguration());
             serviceModelBuilder.Configurations.Add(new CustomerServiceModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new AlbumServiceModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new ArtistServiceModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new EmployeeServiceModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new GenreServiceModelConfiguration());
             serviceModelBuilder.HomeResource<Home>();
 
             var createConventions = CreateConventions();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Chinook
 {
@@ -22,11 +23,17 @@ namespace Chinook
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<HomeResource>();
+            services.AddSingleton<HomeResource>();
+
+            services.AddTransient<IGenerResource, GenreResource>();
+            services.AddTransient<IEmployeeResource, EmployeeResource>();
+            services.AddTransient<IArtistResource, ArtistResource>();
+            services.AddTransient<IAlbumResource, AlbumResource>();
             services.AddTransient<ICustomerResource, CustomerResource>();
             services.AddDbContext<ChinookDbContext>();
 
-            services.AddMediatR(typeof(GetCustomerResourceCollectionHandler));
+            services.AddMediatR(typeof(GetAlbumResourceCollectionHandler).GetTypeInfo().Assembly);
+          
             services.AddHttpContextAccessor();
             services.AddControllers()
                 .AddNewtonsoftJson();

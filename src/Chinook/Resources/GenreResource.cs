@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 
 namespace Chinook.Web.Resources
 {
-    public class CustomerResource : ICustomerResource
+    public class GenreResource : IGenerResource
     {
-        private readonly ILogger<CustomerResource> _logger;
+        private readonly ILogger<AlbumResource> _logger;
         private readonly IMediator _mediator;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CustomerResource(ILogger<CustomerResource> logger, IMediator mediator, IHttpContextAccessor httpContextAccessor)
+        public GenreResource(ILogger<AlbumResource> logger, IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _mediator = mediator;
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Document> GetCustomerResourceCollection()
+        public async Task<Document> GetGenreResourceCollection()
         {
-            var customerResourceCollection = await _mediator.Send(new GetCustomerResourceCollectionCommand());
+            var genreResourceCollection = await _mediator.Send(new GetGenreResourceCollectionCommand());
             var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
@@ -36,7 +36,7 @@ namespace Chinook.Web.Resources
                         .AddSelfLink()
                         .AddUpLink()
                     .LinksEnd()
-                    .ResourceCollection(customerResourceCollection)
+                    .ResourceCollection(genreResourceCollection)
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()
@@ -47,9 +47,9 @@ namespace Chinook.Web.Resources
             return document;
         }
 
-        public async Task<Document> GetCustomerResource(int resourceId)
+        public async Task<Document> GetGenreResource(int resourceId)
         {
-            var customerResource = await _mediator.Send(new GetCustomerResourceCommand(resourceId));
+            var genreResource = await _mediator.Send(new GetGenreResourceCommand(resourceId));
             var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
@@ -60,7 +60,7 @@ namespace Chinook.Web.Resources
                         .AddSelfLink()
                         .AddUpLink()
                     .LinksEnd()
-                    .Resource(customerResource)
+                    .Resource(genreResource)
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()

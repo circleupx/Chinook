@@ -26,7 +26,7 @@ namespace Chinook.Web.Resources
         {
             var homeResource = new Home
             {
-                Message = "Hello World"
+                Message = "Chinook Sample JSON:API Project"
             };
 
             var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
@@ -36,6 +36,10 @@ namespace Chinook.Web.Resources
             var port = currentRequestUri.Port;
             var urlBuilderConfiguration = new UrlBuilderConfiguration(scheme, host, port);
             var customersResourceCollectionLink = CreateCustomerResourceCollectionLink(urlBuilderConfiguration);
+            var albumResourceCollectionLink = CreateAlbumResourceCollectionLink(urlBuilderConfiguration);
+            var artistResourceCollectionLink = CreateArtistResourceCollectionLink(urlBuilderConfiguration);
+            var employeeResourceCollectionLink = CreateEmployeeResourceCollectionLink(urlBuilderConfiguration);
+            var genreResourceCollectionLink = CreateGenreResourceCollectionLink(urlBuilderConfiguration);
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -47,6 +51,10 @@ namespace Chinook.Web.Resources
                             .Resource(homeResource)
                                 .Links()
                                     .AddLink(CustomerResourceKeyWords.Self, customersResourceCollectionLink)
+                                    .AddLink(AlbumResourceKeyWords.Self, albumResourceCollectionLink)
+                                    .AddLink(ArtistResourceKeyWords.Self, artistResourceCollectionLink)
+                                    .AddLink(EmployeeResourceKeyWords.Self, employeeResourceCollectionLink)
+                                    .AddLink(GenreResourceKeyWords.Self, genreResourceCollectionLink)
                                  .LinksEnd()
                             .ResourceEnd()
                         .WriteDocument();
@@ -61,6 +69,42 @@ namespace Chinook.Web.Resources
                                                        .Build();
             
             return new Link(customersResourceCollectionLink);
+        }
+
+        private static Link CreateAlbumResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var albumResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                       .Path(AlbumResourceKeyWords.Self)
+                                                       .Build();
+
+            return new Link(albumResourceCollectionLink);
+        }
+
+        private static Link CreateArtistResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var artistResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                       .Path(ArtistResourceKeyWords.Self)
+                                                       .Build();
+
+            return new Link(artistResourceCollectionLink);
+        }
+
+        private static Link CreateEmployeeResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var employeeResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                       .Path(EmployeeResourceKeyWords.Self)
+                                                       .Build();
+
+            return new Link(employeeResourceCollectionLink);
+        }
+
+        private static Link CreateGenreResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var genreResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                       .Path(GenreResourceKeyWords.Self)
+                                                       .Build();
+
+            return new Link(genreResourceCollectionLink);
         }
     }
 }

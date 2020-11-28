@@ -6,7 +6,7 @@ namespace Chinook.Web.Resources
 {
     public interface ICustomerResource
     {
-        Task<Document> GetCustomerResource();
+        Task<Document> GetCustomerResource(int resourceId);
         Task<Document> GetCustomerResourceCollection();
     }
 }

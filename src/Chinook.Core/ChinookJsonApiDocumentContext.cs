@@ -1,4 +1,4 @@
-﻿using Chinook.Core.Hypemedia.Configurations;
+﻿using Chinook.Core.HypemediaConfiguration;
 using JsonApiFramework;
 using JsonApiFramework.Http;
 using JsonApiFramework.JsonApi;

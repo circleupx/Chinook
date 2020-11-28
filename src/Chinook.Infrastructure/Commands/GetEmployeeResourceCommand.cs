@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Chinook.Infrastructure.Commands
 {
-    public class GetCustomerResourceCommand : IRequest<Customer>
+    public class GetEmployeeResourceCommand : IRequest<Employee>
     {
         public int ResourceId { get; }
 
-        public GetCustomerResourceCommand(int resourceId)
+        public GetEmployeeResourceCommand(int resourceId)
         {
             ResourceId = resourceId;
         }
