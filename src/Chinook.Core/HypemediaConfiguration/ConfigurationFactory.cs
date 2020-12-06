@@ -18,7 +18,9 @@ namespace Chinook.Core.HypemediaConfiguration
             serviceModelBuilder.Configurations.Add(new GenreServiceModelConfiguration());
             serviceModelBuilder.Configurations.Add(new InvoiceServiceModelConfiguration());
             serviceModelBuilder.Configurations.Add(new InvoiceItemServiceModelConfiguration());
-
+            serviceModelBuilder.Configurations.Add(new MediaTypeModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new PlaylistModelConfiguration());
+            serviceModelBuilder.Configurations.Add(new TrackModelConfiguration());
             serviceModelBuilder.HomeResource<Home>();
 
             var createConventions = CreateConventions();

@@ -42,6 +42,9 @@ namespace Chinook.Web.Resources
             var genreResourceCollectionLink = CreateGenreResourceCollectionLink(urlBuilderConfiguration);
             var invoiceResourceCollectionLink = CreateInvoiceResourceCollectionLink(urlBuilderConfiguration);
             var invoiceItemResourceCollectionLink = CreateInvoiceItemResourceCollectionLink(urlBuilderConfiguration);
+            var mediaTypeResourceCollectionLink = CreateMediaTypeResourceCollectionLink(urlBuilderConfiguration);
+            var playlistResourceCollectionLink = CreatePlaylistResourceCollectionLink(urlBuilderConfiguration);
+            var trackResourceCollectionLink = CreateTrackResourceCollectionLink(urlBuilderConfiguration);
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -59,11 +62,41 @@ namespace Chinook.Web.Resources
                                     .AddLink(GenreResourceKeyWords.Self, genreResourceCollectionLink)
                                     .AddLink(InvoiceResourceKeyWords.Self, invoiceResourceCollectionLink)
                                     .AddLink(InvoiceItemResourceKeyWords.Self, invoiceItemResourceCollectionLink)
+                                    .AddLink(MediaTypeResourceKeyWords.Self, mediaTypeResourceCollectionLink)
+                                    .AddLink(PlaylistResourceKeyWords.Self, playlistResourceCollectionLink)
+                                    .AddLink(TrackResourceKeyWords.Self, trackResourceCollectionLink)
                                  .LinksEnd()
                             .ResourceEnd()
                         .WriteDocument();
             _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
             return Task.FromResult(document);
+        }
+
+        private static Link CreateTrackResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var trackResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                     .Path(TrackResourceKeyWords.Self)
+                                                     .Build();
+
+            return new Link(trackResourceCollectionLink);
+        }
+
+        private static Link CreatePlaylistResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var playlistResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                     .Path(PlaylistResourceKeyWords.Self)
+                                                     .Build();
+
+            return new Link(playlistResourceCollectionLink);
+        }
+
+        private static Link CreateMediaTypeResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
+        {
+            var mediaTypeResourceCollectionLink = UrlBuilder.Create(urlBuilderConfiguration)
+                                                     .Path(MediaTypeResourceKeyWords.Self)
+                                                     .Build();
+
+            return new Link(mediaTypeResourceCollectionLink);
         }
 
         private static Link CreateInvoiceItemResourceCollectionLink(UrlBuilderConfiguration urlBuilderConfiguration)
