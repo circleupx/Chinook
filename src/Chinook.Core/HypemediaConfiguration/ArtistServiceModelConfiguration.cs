@@ -1,4 +1,5 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Constants;
+using Chinook.Core.ServiceModels;
 using JsonApiFramework.ServiceModel.Configuration;
 
 namespace Chinook.Core.HypemediaConfiguration
@@ -10,6 +11,8 @@ namespace Chinook.Core.HypemediaConfiguration
             // Ignore ER Core Navigation Properties
             this.Attribute(a => a.Albums)
                 .Ignore();
+
+            this.ToManyRelationship<Album>(AlbumResourceKeyWords.ToManyRelationShipKey);
         }
     }
 }

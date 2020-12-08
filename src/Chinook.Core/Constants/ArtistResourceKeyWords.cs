@@ -3,5 +3,6 @@
     public static class ArtistResourceKeyWords
     {
         public const string Self = "artists";
+        public const string ToOneRelationshipKey = "artist";
     }
 }

@@ -28,5 +28,12 @@ namespace Chinook.Web.Controllers
             var document = await _albumResource.GetAlbumResource(resourceId);
             return Ok(document);
         }
+
+        [Route(AlbumRoutes.AlbumResourceToArtistResource)]
+        public async Task<IActionResult> GetAlbumResourceToArtistResource(int resourceId)
+        {
+            var document = await _albumResource.GetAlbumResourceToArtistResource(resourceId);
+            return Ok(document);
+        }
     }
 }

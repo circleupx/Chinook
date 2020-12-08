@@ -1,5 +1,7 @@
 ﻿using Chinook.Core;
+using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
+using Chinook.Core.ServiceModels;
 using Chinook.Infrastructure.Commands;
 using JsonApiFramework.JsonApi;
 using JsonApiFramework.Server;
@@ -37,9 +39,12 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .ResourceCollection(artistResourceCollection)
+                        .Relationships()
+                            .AddRelationship(AlbumResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
-                        .LinksEnd()
+                        .LinksEnd()                          
                     .ResourceCollectionEnd()
                 .WriteDocument();
 
@@ -61,10 +66,37 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .Resource(artistResource)
+                        .Relationships()
+                            .AddRelationship(AlbumResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()
                     .ResourceEnd()
+                .WriteDocument();
+
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
+            return document;
+        }
+
+        public async Task<Document> GetArtistResourceToAlbumResourceCollection(int resourceId)
+        {
+            var albumResourceCollection = await _mediator.Send(new GetArtistResourceToAlbumResourceCollectionCommand(resourceId));
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
+            var document = chinookDocumentContext
+                .NewDocument(currentRequestUri)
+                .SetJsonApiVersion(JsonApiVersion.Version10)
+                    .Links()
+                        .AddSelfLink()
+                        .AddUpLink()
+                    .LinksEnd()
+                    .ResourceCollection(albumResourceCollection)
+                        .Links()
+                            .AddSelfLink()
+                        .LinksEnd()
+                    .ResourceCollectionEnd()
                 .WriteDocument();
 
             _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);

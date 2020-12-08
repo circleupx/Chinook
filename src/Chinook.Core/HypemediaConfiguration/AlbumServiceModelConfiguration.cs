@@ -1,4 +1,5 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Constants;
+using Chinook.Core.ServiceModels;
 using JsonApiFramework.ServiceModel.Configuration;
 
 namespace Chinook.Core.HypemediaConfiguration
@@ -15,9 +16,10 @@ namespace Chinook.Core.HypemediaConfiguration
                 .Ignore();
 
             // Ignore Foreign Keys
-
             this.Attribute(a => a.ArtistId)
                 .Ignore();
+
+            this.ToOneRelationship<Artist>(ArtistResourceKeyWords.ToOneRelationshipKey);
         }
     }
 }
