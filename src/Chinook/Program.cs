@@ -20,9 +20,10 @@ namespace Chinook
             try
             {
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
-                var host = BuildWebHost(configuration, args);
+                var hostBuilder = CreateWebHostBuilder(args);
 
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
+                var host = hostBuilder.Build();
                 host.Run();
 
                 return 0;
@@ -38,14 +39,17 @@ namespace Chinook
             }
         }
 
-        private static IWebHost BuildWebHost(IConfiguration configuration, string[] args)
+        private static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            return WebHost.CreateDefaultBuilder(args)
+            var configuration = GetConfiguration();
+            var webHost = WebHost.CreateDefaultBuilder(args)
                 .CaptureStartupErrors(false)
                 .ConfigureAppConfiguration(x => x.AddConfiguration(configuration))
                 .UseStartup<Startup>()
                 .UseSerilog()
-                .Build();
+               ;
+
+            return webHost;
         }
 
         private static ILogger CreateSerilogLogger(IConfiguration configuration)
