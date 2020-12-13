@@ -1,4 +1,5 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Extensions;
+using Chinook.Core.ServiceModels;
 using Chinook.Infrastructure.Commands;
 using Chinook.Infrastructure.Database;
 using MediatR;
@@ -19,7 +20,7 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<InvoiceItem> Handle(GetInvoiceItemResourceCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.InvoiceItems.FirstOrDefaultAsync(c => c.InvoiceLineId == request.ResourceId, cancellationToken);
+            return await _chinookDbContext.InvoiceItems.TagWithSource().FirstOrDefaultAsync(c => c.InvoiceLineId == request.ResourceId, cancellationToken);
         }
     }
 }

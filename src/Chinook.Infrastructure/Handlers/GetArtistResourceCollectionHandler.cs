@@ -1,4 +1,5 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Extensions;
+using Chinook.Core.ServiceModels;
 using Chinook.Infrastructure.Commands;
 using Chinook.Infrastructure.Database;
 using MediatR;
@@ -20,7 +21,7 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<Artist>> Handle(GetArtistResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Artists.ToListAsync(cancellationToken);
+            return await _chinookDbContext.Artists.TagWithSource().ToListAsync(cancellationToken);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Extensions;
+using Chinook.Core.ServiceModels;
 using Chinook.Infrastructure.Commands;
 using Chinook.Infrastructure.Database;
 using MediatR;
@@ -19,7 +20,7 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<Album> Handle(GetAlbumResourceCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Albums.FirstOrDefaultAsync(a => a.AlbumId == request.ResourceId, cancellationToken);
+            return await _chinookDbContext.Albums.TagWithSource().FirstOrDefaultAsync(a => a.AlbumId == request.ResourceId, cancellationToken);
         }
     }
 }
