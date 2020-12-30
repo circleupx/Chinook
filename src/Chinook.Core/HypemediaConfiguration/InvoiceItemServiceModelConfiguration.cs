@@ -14,18 +14,18 @@ namespace Chinook.Core.HypemediaConfiguration
             */
             this.ResourceIdentity(p => p.InvoiceLineId);
 
-            // Ignore Id on JSON:API attributes
+            // Ignore Id on JSON:API Object Attributes
             this.Attribute(a => a.InvoiceLineId)
                 .Ignore();
 
-            // Ignore ER Core Navigation Properties
+            // Exclude EF Core Navigation Properties from Serialization/Deserialization
             this.Attribute(a => a.Invoice)
                 .Ignore();
 
             this.Attribute(a => a.Track)
                 .Ignore();
 
-            // Ignore Foreign Keys
+            // Exclude Foreign Keys from Serialization/Deserialization
             this.Attribute(a => a.InvoiceId)
                 .Ignore();
 

@@ -7,7 +7,7 @@ namespace Chinook.Core.HypemediaConfiguration
     {
         public PlaylistModelConfiguration()
         {
-            // Ignore ER Core Navigation Properties
+            // Exclude EF Core Navigation Properties from Serialization/Deserialization
             this.Attribute(a => a.PlaylistTrack)
                 .Ignore();
         }

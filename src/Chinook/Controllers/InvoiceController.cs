@@ -16,16 +16,30 @@ namespace Chinook.Web.Controllers
         }
 
         [Route(InvoiceRoutes.InvoiceResourceCollection)]
-        public async Task<IActionResult> GetAlbumResourceCollection()
+        public async Task<IActionResult> GetInvoiceResourceCollection()
         {
             var document = await _invoiceResource.GetInvoiceResourceCollection();
             return Ok(document);
         }
 
         [Route(InvoiceRoutes.InvoiceResource)]
-        public async Task<IActionResult> GetAlbumResource(int resourceId)
+        public async Task<IActionResult> GetInvoiceResource(int resourceId)
         {
             var document = await _invoiceResource.GetInvoiceResource(resourceId);
+            return Ok(document);
+        }
+
+        [Route(InvoiceRoutes.InvoiceResourceToCustomerResource)]
+        public async Task<IActionResult> GetInvoiceResourceToCustomerResource(int resourceId)
+        {
+            var document = await _invoiceResource.GetInvoiceResourceToCustomerResource(resourceId);
+            return Ok(document);
+        }
+
+        [Route(InvoiceRoutes.InvoiceResourceToInvoiceItemResourceCollection)]
+        public async Task<IActionResult> GetInvoiceResourceToInvoiceItemResourceCollection(int resourceId)
+        {
+            var document = await _invoiceResource.GetInvoiceResourceToInvoiceItemResourceCollection(resourceId);
             return Ok(document);
         }
     }

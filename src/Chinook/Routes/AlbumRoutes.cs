@@ -7,6 +7,6 @@ namespace Chinook.Web.Routes
         public const string AlbumResourceCollection = AlbumResourceKeyWords.Self;
         public const string AlbumResource = AlbumResourceKeyWords.Self + StandardRouteValues.ForwardSlash + StandardRouteValues.IdUriTemplate;
         public const string AlbumResourceToArtistResource = AlbumResourceKeyWords.Self + StandardRouteValues.ForwardSlash + StandardRouteValues.IdUriTemplate + StandardRouteValues.ForwardSlash + ArtistResourceKeyWords.ToOneRelationshipKey;
-
+        public const string AlbumResourceToTrackResourceCollection = AlbumResourceKeyWords.Self + StandardRouteValues.ForwardSlash + StandardRouteValues.IdUriTemplate + StandardRouteValues.ForwardSlash + TrackResourceKeyWords.ToManyRelationShipKey;
     }
 }

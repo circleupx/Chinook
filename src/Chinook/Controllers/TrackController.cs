@@ -15,17 +15,24 @@ namespace Chinook.Web.Controllers
             _trackResource = trackResource;
         }
 
-        [Route(TrackRoutes.PlaylistResourceCollection)]
+        [Route(TrackRoutes.TrackResourceCollection)]
         public async Task<IActionResult> GetAlbumResourceCollection()
         {
             var document = await _trackResource.GetTrackResourceCollection();
             return Ok(document);
         }
 
-        [Route(TrackRoutes.PlaylistResource)]
+        [Route(TrackRoutes.TrackResource)]
         public async Task<IActionResult> GetAlbumResource(int resourceId)
         {
             var document = await _trackResource.GetTrackResource(resourceId);
+            return Ok(document);
+        }
+
+        [Route(TrackRoutes.TrackResourceToAlbumResource)]
+        public async Task<IActionResult> GetTrackResourceToAlbumResource(int resourceId)
+        {
+            var document = await _trackResource.GetTrackResourceToAlbumResource(resourceId);
             return Ok(document);
         }
     }

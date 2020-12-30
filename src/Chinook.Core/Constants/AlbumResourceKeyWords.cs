@@ -4,5 +4,6 @@
     {
         public const string Self = "albums";
         public const string ToManyRelationShipKey = Self;
+        public const string ToOneRelationshipKey = "album";
     }
 }

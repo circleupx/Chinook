@@ -7,14 +7,14 @@ namespace Chinook.Core.HypemediaConfiguration
     {
         public CustomerServiceModelConfiguration()
         {
-            // Ignore EF Core Navigation Properties
+            // Exclude EF Core Navigation Properties from Serialization/Deserialization
             this.Attribute(a => a.SupportRep)
                 .Ignore();
 
             this.Attribute(a => a.Invoices)
                 .Ignore();
 
-            // Ignore Foreign Keys
+            // Exclude Foreign Keys from Serialization/Deserialization
             this.Attribute(a => a.SupportRepId)
                 .Ignore();
         }

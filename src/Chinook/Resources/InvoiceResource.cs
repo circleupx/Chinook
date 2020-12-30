@@ -1,4 +1,5 @@
 ﻿using Chinook.Core;
+using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
 using Chinook.Infrastructure.Commands;
 using JsonApiFramework.JsonApi;
@@ -37,6 +38,10 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .ResourceCollection(invoiceResourceCollection)
+                        .Relationships()
+                            .AddRelationship(CustomerResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(InvoiceItemResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()
@@ -61,10 +66,62 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .Resource(invoiceResource)
+                        .Relationships()
+                            .AddRelationship(CustomerResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(InvoiceItemResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()
                     .ResourceEnd()
+                .WriteDocument();
+
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
+            return document;
+        }
+
+        public async Task<Document> GetInvoiceResourceToCustomerResource(int resourceId)
+        {
+            var customerResource = await _mediator.Send(new GetInvoiceResourceToCustomerResourceCommand(resourceId));
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
+            var document = chinookDocumentContext
+                .NewDocument(currentRequestUri)
+                .SetJsonApiVersion(JsonApiVersion.Version10)
+                    .Links()
+                        .AddSelfLink()
+                        .AddUpLink()
+                    .LinksEnd()
+                    .Resource(customerResource)
+                        .Links()
+                            .AddSelfLink()
+                        .LinksEnd()
+                    .ResourceEnd()
+                .WriteDocument();
+
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
+            return document;
+        }
+
+        public async Task<Document> GetInvoiceResourceToInvoiceItemResourceCollection(int resourceId)
+        {
+            var invoiceItemResourceCollection = await _mediator.Send(new GetInvoiceResourceToInvoiceItemResourceCollectionCommand(resourceId));
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
+            var document = chinookDocumentContext
+                .NewDocument(currentRequestUri)
+                .SetJsonApiVersion(JsonApiVersion.Version10)
+                    .Links()
+                        .AddSelfLink()
+                        .AddUpLink()
+                    .LinksEnd()
+                    .ResourceCollection(invoiceItemResourceCollection)
+                        .Links()
+                            .AddSelfLink()
+                        .LinksEnd()
+                    .ResourceCollectionEnd()
                 .WriteDocument();
 
             _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);

@@ -1,4 +1,5 @@
 ﻿using Chinook.Core;
+using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
 using Chinook.Infrastructure.Commands;
 using JsonApiFramework.JsonApi;
@@ -37,6 +38,13 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .ResourceCollection(trackResourceCollection)
+                        .Relationships()
+                            .AddRelationship(AlbumResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(GenreResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(MediaTypeResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(InvoiceItemResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                            .AddRelationship(PlaylistResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()
@@ -61,6 +69,37 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .Resource(trackResource)
+                        .Relationships()
+                            .AddRelationship(AlbumResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(GenreResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(MediaTypeResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(InvoiceItemResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                            .AddRelationship(PlaylistResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
+                        .Links()
+                            .AddSelfLink()
+                        .LinksEnd()
+                    .ResourceEnd()
+                .WriteDocument();
+
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
+            return document;
+        }
+
+        public async Task<Document> GetTrackResourceToAlbumResource(int resourceId)
+        {
+            var albumResource = await _mediator.Send(new GetTackResourceToAlbumResourceCommand(resourceId));
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
+            var document = chinookDocumentContext
+                .NewDocument(currentRequestUri)
+                .SetJsonApiVersion(JsonApiVersion.Version10)
+                    .Links()
+                        .AddSelfLink()
+                        .AddUpLink()
+                    .LinksEnd()
+                    .Resource(albumResource)
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()

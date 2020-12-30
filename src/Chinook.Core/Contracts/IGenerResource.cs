@@ -7,5 +7,6 @@ namespace Chinook.Web.Resources
     {
         Task<Document> GetGenreResource(int resourceId);
         Task<Document> GetGenreResourceCollection();
+        Task<Document> GetGenreResourceToTrackResourceCollection(int resourceId);
     }
 }

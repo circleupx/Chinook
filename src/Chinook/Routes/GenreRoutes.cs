@@ -6,5 +6,6 @@ namespace Chinook.Web.Routes
     {
         public const string GenreResourceCollection = GenreResourceKeyWords.Self;
         public const string GenreResource = GenreResourceKeyWords.Self + StandardRouteValues.ForwardSlash + StandardRouteValues.IdUriTemplate;
+        public const string GenreResourceToTrackResourceCollection = GenreResourceKeyWords.Self + StandardRouteValues.ForwardSlash + StandardRouteValues.IdUriTemplate + StandardRouteValues.ForwardSlash + TrackResourceKeyWords.ToManyRelationShipKey;
     }
 }

@@ -5,7 +5,8 @@ namespace Chinook.Web.Resources
 {
     public interface ITrackResource
     {
-        Task<Document> GetTrackResource(int resourceId);
         Task<Document> GetTrackResourceCollection();
+        Task<Document> GetTrackResourceToAlbumResource(int resourceId);
+        Task<Document> GetTrackResource(int resourceId);
     }
 }

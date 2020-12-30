@@ -8,5 +8,6 @@ namespace Chinook.Web.Resources
         Task<Document> GetAlbumResource(int resourceId);
         Task<Document> GetAlbumResourceCollection();
         Task<Document> GetAlbumResourceToArtistResource(int resourceId);
+        Task<Document> GetAlbumResourceToTrackResourceCollection(int resourceId);
     }
 }

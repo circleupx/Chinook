@@ -7,7 +7,7 @@ namespace Chinook.Core.HypemediaConfiguration
     {
         public EmployeeServiceModelConfiguration()
         {
-            // Ignore EF Core Navigation Properties
+            // Exclude EF Core Navigation Properties from Serialization/Deserialization
             this.Attribute(a => a.ReportsToNavigation)
                 .Ignore();
 
@@ -17,7 +17,7 @@ namespace Chinook.Core.HypemediaConfiguration
             this.Attribute(a => a.InverseReportsToNavigation)
                 .Ignore();
 
-            // Ignore Foreign Keys
+            // Exclude Foreign Keys from Serialization/Deserialization
             this.Attribute(a => a.ReportsTo)
                 .Ignore();
         }

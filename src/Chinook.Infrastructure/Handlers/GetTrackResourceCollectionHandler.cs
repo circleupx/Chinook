@@ -5,6 +5,7 @@ using Chinook.Infrastructure.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,7 +22,12 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<Track>> Handle(GetTrackResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Tracks.TagWithSource().ToListAsync(cancellationToken: cancellationToken);
+            // Limit the amount of data return until pagination is implemented.
+            return await _chinookDbContext.Tracks
+                .TagWithSource()
+                .Skip(0)
+                .Take(100)
+                .ToListAsync(cancellationToken: cancellationToken);
         }
     }
 }

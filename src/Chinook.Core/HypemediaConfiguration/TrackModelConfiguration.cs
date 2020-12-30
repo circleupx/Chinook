@@ -1,4 +1,5 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Constants;
+using Chinook.Core.ServiceModels;
 using JsonApiFramework.ServiceModel.Configuration;
 
 namespace Chinook.Core.HypemediaConfiguration
@@ -7,7 +8,7 @@ namespace Chinook.Core.HypemediaConfiguration
     {
         public TrackModelConfiguration()
         {
-            // Ignore ER Core Navigation Properties
+            // Exclude EF Core Navigation Properties from Serialization/Deserialization
             this.Attribute(a => a.Album)
                 .Ignore();
 
@@ -23,7 +24,7 @@ namespace Chinook.Core.HypemediaConfiguration
             this.Attribute(a => a.PlaylistTrack)
                 .Ignore();
 
-            // Ignore Foreign Keys
+            // Exclude Foreign Keys from Serialization/Deserialization
             this.Attribute(a => a.MediaTypeId)
                 .Ignore();
 
@@ -32,6 +33,13 @@ namespace Chinook.Core.HypemediaConfiguration
 
             this.Attribute(a => a.GenreId)
                 .Ignore();
+
+            // Expose JSON:API Relationships
+            this.ToOneRelationship<Album>(AlbumResourceKeyWords.ToOneRelationshipKey);
+            this.ToOneRelationship<Genre>(GenreResourceKeyWords.ToOneRelationshipKey);
+            this.ToOneRelationship<MediaType>(MediaTypeResourceKeyWords.ToOneRelationshipKey);
+            this.ToManyRelationship<InvoiceItem>(InvoiceItemResourceKeyWords.ToManyRelationShipKey);
+            this.ToManyRelationship<PlaylistTrack>(PlaylistResourceKeyWords.ToManyRelationShipKey);
         }
     }
 }

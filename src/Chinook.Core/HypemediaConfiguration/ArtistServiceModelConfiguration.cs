@@ -8,10 +8,11 @@ namespace Chinook.Core.HypemediaConfiguration
     {
         public ArtistServiceModelConfiguration()
         {
-            // Ignore ER Core Navigation Properties
+            // Ignore EF Core Navigation Properties from Serialization/Deserialization
             this.Attribute(a => a.Albums)
                 .Ignore();
 
+            // Expose JSON:API Relationships
             this.ToManyRelationship<Album>(AlbumResourceKeyWords.ToManyRelationShipKey);
         }
     }

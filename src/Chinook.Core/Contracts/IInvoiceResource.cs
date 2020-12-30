@@ -7,5 +7,7 @@ namespace Chinook.Web.Resources
     {
         Task<Document> GetInvoiceResource(int resourceId);
         Task<Document> GetInvoiceResourceCollection();
+        Task<Document> GetInvoiceResourceToCustomerResource(int resourceId);
+        Task<Document> GetInvoiceResourceToInvoiceItemResourceCollection(int resourceId);
     }
 }

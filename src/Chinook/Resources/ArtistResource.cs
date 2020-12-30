@@ -1,7 +1,6 @@
 ﻿using Chinook.Core;
 using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
-using Chinook.Core.ServiceModels;
 using Chinook.Infrastructure.Commands;
 using JsonApiFramework.JsonApi;
 using JsonApiFramework.Server;
