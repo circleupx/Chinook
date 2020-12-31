@@ -14,7 +14,8 @@ namespace Chinook.Core.Extensions
                 Scheme = currentRequest.Scheme,
                 Host = currentRequest.Host.Host,
                 Port = currentRequest.Host.Port.GetValueOrDefault(),
-                Path = currentRequest.Path.Value
+                Path = currentRequest.Path.Value,
+                Query = currentRequest.QueryString.ToUriComponent()
             };
 
             var currentRequestUri = currentRequestUriBuilder.Uri;
