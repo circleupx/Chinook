@@ -21,7 +21,9 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<MediaType>> Handle(GetMediaTypeResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.MediaTypes.TagWithSource().ToListAsync(cancellationToken: cancellationToken);
+            return await _chinookDbContext.MediaTypes
+                .TagWithSource()
+                .ToListAsync(cancellationToken: cancellationToken);
         }
     }
 }

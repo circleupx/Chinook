@@ -39,7 +39,7 @@ namespace Chinook.Core.HypemediaConfiguration
             this.ToOneRelationship<Genre>(GenreResourceKeyWords.ToOneRelationshipKey);
             this.ToOneRelationship<MediaType>(MediaTypeResourceKeyWords.ToOneRelationshipKey);
             this.ToManyRelationship<InvoiceItem>(InvoiceItemResourceKeyWords.ToManyRelationShipKey);
-            this.ToManyRelationship<PlaylistTrack>(PlaylistResourceKeyWords.ToManyRelationShipKey);
+            this.ToManyRelationship<PlaylistTrack>(PlaylistTrackResourceKeyWords.ToManyRelationShipKey);
         }
     }
 }

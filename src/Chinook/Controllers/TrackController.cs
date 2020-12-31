@@ -35,5 +35,33 @@ namespace Chinook.Web.Controllers
             var document = await _trackResource.GetTrackResourceToAlbumResource(resourceId);
             return Ok(document);
         }
+
+        [Route(TrackRoutes.TrackResourceToGenreResource)]
+        public async Task<IActionResult> GetTrackResourceToGenreResource(int resourceId)
+        {
+            var document = await _trackResource.GetTrackResourceToGenreResource(resourceId);
+            return Ok(document);
+        }
+
+        [Route(TrackRoutes.TrackResourceToMediaTypeResource)]
+        public async Task<IActionResult> GetTrackResourceToMediaTypeResource(int resourceId)
+        {
+            var document = await _trackResource.GetTrackResourceToMediaTypeResource(resourceId);
+            return Ok(document);
+        }
+
+        [Route(TrackRoutes.TrackResourceToInvoiceItemResourceCollection)]
+        public async Task<IActionResult> GetTrackResourceToInvoiceItemResourceCollection(int resourceId)
+        {
+            var document = await _trackResource.GetTrackResourceToInvoiceItemResourceCollection(resourceId);
+            return Ok(document);
+        }
+
+        [Route(TrackRoutes.TrackResourceToPlaylistTrackResourceCollection)]
+        public async Task<IActionResult> GetTrackResourceToPlaylistTrackResourceCollection(int resourceId)
+        {
+            var document = await _trackResource.GetTrackResourceToPlaylistTrackResourceCollection(resourceId);
+            return Ok(document);
+        }
     }
 }

@@ -21,7 +21,9 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<Customer>> Handle(GetCustomerResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Customers.TagWithSource().ToListAsync(cancellationToken);
+            return await _chinookDbContext.Customers
+                .TagWithSource()
+                .ToListAsync(cancellationToken);
         }
     }
 }

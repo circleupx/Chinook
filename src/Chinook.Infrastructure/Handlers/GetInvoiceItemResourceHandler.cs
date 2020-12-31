@@ -20,7 +20,9 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<InvoiceItem> Handle(GetInvoiceItemResourceCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.InvoiceItems.TagWithSource().FirstOrDefaultAsync(c => c.InvoiceLineId == request.ResourceId, cancellationToken);
+            return await _chinookDbContext.InvoiceItems
+                .TagWithSource()
+                .FirstOrDefaultAsync(c => c.InvoiceLineId == request.ResourceId, cancellationToken);
         }
     }
 }

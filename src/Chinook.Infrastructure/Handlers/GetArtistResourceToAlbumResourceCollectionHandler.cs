@@ -22,7 +22,10 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<Album>> Handle(GetArtistResourceToAlbumResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Albums.TagWithSource().Where(a => a.ArtistId == request.ResourceId).ToListAsync();
+            return await _chinookDbContext.Albums
+                .TagWithSource()
+                .Where(a => a.ArtistId == request.ResourceId)
+                .ToListAsync();
         }
     }
 }

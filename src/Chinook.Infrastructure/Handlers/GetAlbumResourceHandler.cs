@@ -20,7 +20,9 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<Album> Handle(GetAlbumResourceCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Albums.TagWithSource().FirstOrDefaultAsync(a => a.AlbumId == request.ResourceId, cancellationToken);
+            return await _chinookDbContext.Albums
+                .TagWithSource()
+                .FirstOrDefaultAsync(a => a.AlbumId == request.ResourceId, cancellationToken);
         }
     }
 }

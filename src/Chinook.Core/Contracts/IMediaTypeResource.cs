@@ -7,5 +7,6 @@ namespace Chinook.Web.Resources
     {
         Task<Document> GetMediaTypeResource(int resourceId);
         Task<Document> GetMediaTypeResourceCollection();
+        Task<Document> GetMediaTypeResourceToTrackResourceCollection(int resourceId);
     }
 }

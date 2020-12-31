@@ -46,8 +46,7 @@ namespace Chinook
                 .CaptureStartupErrors(false)
                 .ConfigureAppConfiguration(x => x.AddConfiguration(configuration))
                 .UseStartup<Startup>()
-                .UseSerilog()
-               ;
+                .UseSerilog();
 
             return webHost;
         }

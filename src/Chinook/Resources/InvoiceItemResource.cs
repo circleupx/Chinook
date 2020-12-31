@@ -1,4 +1,5 @@
 ﻿using Chinook.Core;
+using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
 using Chinook.Infrastructure.Commands;
 using JsonApiFramework.JsonApi;
@@ -37,6 +38,10 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .ResourceCollection(invoiceItemResourceCollection)
+                        .Relationships()
+                            .AddRelationship(InvoiceResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(TrackResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()
@@ -61,6 +66,68 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .Resource(invoiceItemResource)
+                        .Relationships()
+                            .AddRelationship(InvoiceResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(TrackResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
+                        .Links()
+                            .AddSelfLink()
+                        .LinksEnd()
+                    .ResourceEnd()
+                .WriteDocument();
+
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
+            return document;
+        }
+
+        public async Task<Document> GetInvoiceItemResourceToInvoiceResource(int resourceId)
+        {
+            var invoiceResource = await _mediator.Send(new GetInvoiceItemResourceToInvoiceResourceCommand(resourceId));
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
+            var document = chinookDocumentContext
+                .NewDocument(currentRequestUri)
+                .SetJsonApiVersion(JsonApiVersion.Version10)
+                    .Links()
+                        .AddSelfLink()
+                        .AddUpLink()
+                    .LinksEnd()
+                    .Resource(invoiceResource)
+                        .Relationships()
+                            .AddRelationship(CustomerResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
+                        .Links()
+                            .AddSelfLink()
+                        .LinksEnd()
+                    .ResourceEnd()
+                .WriteDocument();
+
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
+            return document;
+        }
+
+        public async Task<Document> GetInvoiceItemResourceToTrackResource(int resourceId)
+        {
+            var trackResource = await _mediator.Send(new GetInvoiceItemResourceToTrackResourceCommand(resourceId));
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
+            var document = chinookDocumentContext
+                .NewDocument(currentRequestUri)
+                .SetJsonApiVersion(JsonApiVersion.Version10)
+                    .Links()
+                        .AddSelfLink()
+                        .AddUpLink()
+                    .LinksEnd()
+                    .Resource(trackResource)
+                        .Relationships()
+                            .AddRelationship(AlbumResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(GenreResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(MediaTypeResourceKeyWords.ToOneRelationshipKey, new[] { Keywords.Related })
+                            .AddRelationship(InvoiceItemResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                            .AddRelationship(PlaylistTrackResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()

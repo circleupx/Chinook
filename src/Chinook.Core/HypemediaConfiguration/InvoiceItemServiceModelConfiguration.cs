@@ -1,4 +1,5 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Constants;
+using Chinook.Core.ServiceModels;
 using JsonApiFramework.ServiceModel.Configuration;
 
 namespace Chinook.Core.HypemediaConfiguration
@@ -31,6 +32,10 @@ namespace Chinook.Core.HypemediaConfiguration
 
             this.Attribute(a => a.TrackId)
                 .Ignore();
+
+            // Expose JSON:API Relationships
+            this.ToOneRelationship<Invoice>(InvoiceResourceKeyWords.ToOneRelationshipKey);
+            this.ToOneRelationship<Track>(TrackResourceKeyWords.ToOneRelationshipKey);
         }
     }
 }

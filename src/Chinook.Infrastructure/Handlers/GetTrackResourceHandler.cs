@@ -20,7 +20,9 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<Track> Handle(GetTrackResourceCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Tracks.TagWithSource().FirstOrDefaultAsync(c => c.TrackId == request.ResourceId, cancellationToken);
+            return await _chinookDbContext.Tracks
+                .TagWithSource()
+                .FirstOrDefaultAsync(c => c.TrackId == request.ResourceId, cancellationToken);
         }
     }
 }

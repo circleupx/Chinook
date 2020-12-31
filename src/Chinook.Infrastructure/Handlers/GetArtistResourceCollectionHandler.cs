@@ -21,7 +21,9 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<Artist>> Handle(GetArtistResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Artists.TagWithSource().ToListAsync(cancellationToken);
+            return await _chinookDbContext.Artists
+                .TagWithSource()
+                .ToListAsync(cancellationToken);
         }
     }
 }

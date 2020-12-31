@@ -16,10 +16,6 @@ namespace Chinook.Core.HypemediaConfiguration
 
             this.Attribute(a => a.InverseReportsToNavigation)
                 .Ignore();
-
-            // Exclude Foreign Keys from Serialization/Deserialization
-            this.Attribute(a => a.ReportsTo)
-                .Ignore();
         }
     }
 }

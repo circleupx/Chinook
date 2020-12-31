@@ -1,4 +1,5 @@
 ﻿using Chinook.Core;
+using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
 using Chinook.Infrastructure.Commands;
 using JsonApiFramework.JsonApi;
@@ -37,6 +38,9 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .ResourceCollection(mediaTypeResourceCollection)
+                        .Relationships()
+                            .AddRelationship(TrackResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()
@@ -61,10 +65,37 @@ namespace Chinook.Web.Resources
                         .AddUpLink()
                     .LinksEnd()
                     .Resource(mediaTypeResource)
+                        .Relationships()
+                            .AddRelationship(TrackResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
                         .Links()
                             .AddSelfLink()
                         .LinksEnd()
                     .ResourceEnd()
+                .WriteDocument();
+
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
+            return document;
+        }
+
+        public async Task<Document> GetMediaTypeResourceToTrackResourceCollection(int resourceId)
+        {
+            var trackReourceCollection = await _mediator.Send(new GetMediaTypeResourceToTrackResourceCollectionCommand(resourceId));
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
+            var document = chinookDocumentContext
+                .NewDocument(currentRequestUri)
+                .SetJsonApiVersion(JsonApiVersion.Version10)
+                    .Links()
+                        .AddSelfLink()
+                        .AddUpLink()
+                    .LinksEnd()
+                    .ResourceCollection(trackReourceCollection)
+                        .Links()
+                            .AddSelfLink()
+                        .LinksEnd()
+                    .ResourceCollectionEnd()
                 .WriteDocument();
 
             _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);

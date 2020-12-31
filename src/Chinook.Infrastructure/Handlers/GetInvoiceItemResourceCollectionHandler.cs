@@ -5,6 +5,7 @@ using Chinook.Infrastructure.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,7 +22,12 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<InvoiceItem>> Handle(GetInvoiceItemResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.InvoiceItems.TagWithSource().ToListAsync(cancellationToken);
+            // Limit the amount of data return until pagination is implemented.
+            return await _chinookDbContext.InvoiceItems
+                .TagWithSource()
+                .Skip(0)
+                .Take(100)
+                .ToListAsync(cancellationToken);
         }
     }
 }

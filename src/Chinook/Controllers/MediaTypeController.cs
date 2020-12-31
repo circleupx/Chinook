@@ -16,16 +16,23 @@ namespace Chinook.Web.Controllers
         }
 
         [Route(MediaTypeRoutes.MediaTypeResourceCollection)]
-        public async Task<IActionResult> GetAlbumResourceCollection()
+        public async Task<IActionResult> GetMediaTypeResourceCollection()
         {
             var document = await _mediaTypeResource.GetMediaTypeResourceCollection();
             return Ok(document);
         }
 
         [Route(MediaTypeRoutes.MediaTypeResource)]
-        public async Task<IActionResult> GetAlbumResource(int resourceId)
+        public async Task<IActionResult> GetMediaTypeResource(int resourceId)
         {
             var document = await _mediaTypeResource.GetMediaTypeResource(resourceId);
+            return Ok(document);
+        }
+
+        [Route(MediaTypeRoutes.MediaTypeResourceToTrackResourceCollection)]
+        public async Task<IActionResult> GetMediaTypeResourceToTrackResourceCollection(int resourceId)
+        {
+            var document = await _mediaTypeResource.GetMediaTypeResourceToTrackResourceCollection(resourceId);
             return Ok(document);
         }
     }

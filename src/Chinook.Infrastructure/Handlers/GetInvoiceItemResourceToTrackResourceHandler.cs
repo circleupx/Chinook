@@ -10,21 +10,22 @@ using System.Threading.Tasks;
 
 namespace Chinook.Infrastructure.Handlers
 {
-    public class GetAlbumResourceToArtistResourceHandler : IRequestHandler<GetAlbumResourceToArtistResourceCommand, Artist>
+    public class GetInvoiceItemResourceToTrackResourceHandler : IRequestHandler<GetInvoiceItemResourceToTrackResourceCommand, Track>
     {
         private readonly ChinookDbContext _chinookDbContext;
 
-        public GetAlbumResourceToArtistResourceHandler(ChinookDbContext chinookDbContext)
+        public GetInvoiceItemResourceToTrackResourceHandler(ChinookDbContext chinookDbContext)
         {
             _chinookDbContext = chinookDbContext;
         }
 
-        public async Task<Artist> Handle(GetAlbumResourceToArtistResourceCommand request, CancellationToken cancellationToken)
+        public async Task<Track> Handle(GetInvoiceItemResourceToTrackResourceCommand request, CancellationToken cancellationToken)
         {
-            var query = _chinookDbContext.Albums
+            var query = _chinookDbContext.InvoiceItems
                 .TagWithSource()
-                .Where(a => a.AlbumId == request.ResourceId)
-                .Select(d => d.Artist);
+                .Where(a => a.InvoiceLineId == request.ResourceId)
+                .Select(d => d.Track);
+
             return await query.SingleOrDefaultAsync(cancellationToken);
         }
     }

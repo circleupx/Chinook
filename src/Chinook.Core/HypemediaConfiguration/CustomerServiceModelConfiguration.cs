@@ -1,4 +1,5 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Constants;
+using Chinook.Core.ServiceModels;
 using JsonApiFramework.ServiceModel.Configuration;
 
 namespace Chinook.Core.HypemediaConfiguration
@@ -17,6 +18,9 @@ namespace Chinook.Core.HypemediaConfiguration
             // Exclude Foreign Keys from Serialization/Deserialization
             this.Attribute(a => a.SupportRepId)
                 .Ignore();
+
+            // Expose JSON:API Relationships
+            this.ToManyRelationship<Invoice>(InvoiceResourceKeyWords.ToManyRelationShipKey);
         }
     }
 }

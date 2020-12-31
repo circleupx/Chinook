@@ -21,7 +21,9 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<Genre>> Handle(GetGenreResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Genres.TagWithSource().ToListAsync(cancellationToken);
+            return await _chinookDbContext.Genres
+                .TagWithSource()
+                .ToListAsync(cancellationToken);
         }
     }
 }

@@ -28,5 +28,12 @@ namespace Chinook.Web.Controllers
             var document = await _customerResource.GetCustomerResource(resourceId);
             return Ok(document);
         }
+
+        [Route(CustomerRoutes.CustomerResourceToInvoiceResourceCollection)]
+        public async Task<IActionResult> GetCustomerResourceToInvoiceResourceCollection(int resourceId)
+        {
+            var document = await _customerResource.GetCustomerResourceToInvoiceResourceCollection(resourceId);
+            return Ok(document);
+        }
     }
 }
