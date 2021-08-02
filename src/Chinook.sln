@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinook.Web", "Chinook\Chinook.Web.csproj", "{164CC135-B6EC-4BA6-8259-474739F8A3E5}"
 EndProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinook.Core", "Chinook.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinook.Infrastructure", "Chinook.Infrastructure\Chinook.Infrastructure.csproj", "{A2EE8470-7B61-4AA2-95B6-635B988827D5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Test", "Unit Test", "{3192D5D8-43FF-4971-A4A8-EE309F9982AE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3192D5D8-43FF-4971-A4A8-EE309F9982AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinook.Core.UnitTest", "..\test\Chinook.Core.Test\Chinook.Core.UnitTest.csproj", "{A175DAC0-BEC5-4C51-9664-B2565B416F3F}"
 EndProject
@@ -21,9 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{716DC3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{B7A44872-34DD-453F-A4A5-9940D0675603}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration Test", "Integration Test", "{08F80208-D5DC-4C96-96D3-F09C54A5B7A5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinook.Web.IntegrationTest", "..\test\Chinook.Web.IntegrationTest\Chinook.Web.IntegrationTest.csproj", "{221705E5-FB2B-4C2C-918B-D7978AC6D8A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinook.Web.IntegrationTest", "..\test\Chinook.Web.IntegrationTest\Chinook.Web.IntegrationTest.csproj", "{221705E5-FB2B-4C2C-918B-D7978AC6D8A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,7 +63,7 @@ Global
 		{A2EE8470-7B61-4AA2-95B6-635B988827D5} = {B7A44872-34DD-453F-A4A5-9940D0675603}
 		{A175DAC0-BEC5-4C51-9664-B2565B416F3F} = {3192D5D8-43FF-4971-A4A8-EE309F9982AE}
 		{5C15551D-1314-4DC8-BF08-5977C182EF2D} = {3192D5D8-43FF-4971-A4A8-EE309F9982AE}
-		{221705E5-FB2B-4C2C-918B-D7978AC6D8A9} = {08F80208-D5DC-4C96-96D3-F09C54A5B7A5}
+		{221705E5-FB2B-4C2C-918B-D7978AC6D8A9} = {3192D5D8-43FF-4971-A4A8-EE309F9982AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0F00824-379F-4A2E-A8C0-9144E3A004E8}
