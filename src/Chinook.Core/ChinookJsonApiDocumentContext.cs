@@ -26,6 +26,11 @@ namespace Chinook.Core
             UrlBuilderConfiguration = urlBuilderConfiguration;
         }
 
+        public ChinookJsonApiDocumentContext(Document apiDocument) : base(apiDocument)
+        {
+
+        }
+
         protected override void OnConfiguring(IDocumentContextOptionsBuilder optionsBuilder)
         {
 

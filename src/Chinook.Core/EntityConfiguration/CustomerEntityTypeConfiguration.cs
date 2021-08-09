@@ -15,8 +15,7 @@ namespace Chinook.Core.EntityConfiguration
             entityTypeBuilder.HasIndex(e => e.SupportRepId)
                 .HasDatabaseName("IFK_CustomerSupportRepId");
 
-            entityTypeBuilder.Property(e => e.CustomerId)
-                .ValueGeneratedNever();
+            entityTypeBuilder.Property(e => e.CustomerId);
 
             entityTypeBuilder.Property(e => e.Address)
                 .HasColumnType("NVARCHAR(70)");

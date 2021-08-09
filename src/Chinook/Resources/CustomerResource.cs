@@ -1,7 +1,9 @@
 ﻿using Chinook.Core;
 using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
+using Chinook.Core.ServiceModels;
 using Chinook.Infrastructure.Commands;
+using JsonApiFramework;
 using JsonApiFramework.JsonApi;
 using JsonApiFramework.Server;
 using MediatR;
@@ -99,6 +101,34 @@ namespace Chinook.Web.Resources
                             .AddSelfLink()
                         .LinksEnd()
                     .ResourceCollectionEnd()
+                .WriteDocument();
+
+            _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
+            return document;
+        }
+
+        public async Task<Document> CreateCustomerResource(Document jsonApiDocument)
+        {
+
+            var createdCustomerResource = await _mediator.Send(new CreateCustomerResourceCommand(jsonApiDocument));
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+
+            using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
+            var document = chinookDocumentContext
+                .NewDocument(currentRequestUri)
+                .SetJsonApiVersion(JsonApiVersion.Version10)
+                    .Links()
+                        .AddSelfLink()
+                        .AddUpLink()
+                    .LinksEnd()
+                    .Resource(createdCustomerResource)
+                        .Relationships()
+                            .AddRelationship(InvoiceResourceKeyWords.ToManyRelationShipKey, new[] { Keywords.Related })
+                        .RelationshipsEnd()
+                        .Links()
+                            .AddSelfLink()
+                        .LinksEnd()
+                    .ResourceEnd()
                 .WriteDocument();
 
             _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
