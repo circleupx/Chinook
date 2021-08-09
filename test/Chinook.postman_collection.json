@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "4c072227-001a-4198-80e4-d61a6d6c01d7",
+		"name": "Chinook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new customer - no related resources",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"customers\",\r\n        \"attributes\": {\r\n            \"firstName\": \"{{$randomFirstName}}\",\r\n            \"lastName\": \"{{$randomLastName}}\",\r\n            \"company\": \"{{$randomCompanyName}}\",\r\n            \"address\": \"{{$randomStreetAddress}}\",\r\n            \"city\": \"{{$randomCity}}\",\r\n            \"state\": \"{{$randomCountryCode}}\",\r\n            \"country\": \"{{$randomCountry}}\",\r\n            \"postalCode\": \"{{$randomCountryCode}}\",\r\n            \"phone\": \"{{$randomPhoneNumber}}\",\r\n            \"fax\": \"{{$randomPhoneNumber}}\",\r\n            \"email\": \"{{$randomEmail}}\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://chinook-jsonapi.herokuapp.com/customers",
+					"protocol": "https",
+					"host": [
+						"chinook-jsonapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"customers"
+					]
+				},
+				"description": "Use this request to create a new customer with no related reources"
+			},
+			"response": []
+		}
+	]
+}
