@@ -17,6 +17,15 @@ namespace Chinook.Web.Controllers
         }
 
         [HttpGet]
+        [Route(CustomerRoutes.CustomerSchema)]
+        public async Task<IActionResult> GetCustomerSchema()
+        {
+            var schemaFile = System.IO.File.OpenText("schemas/customer-json-schema.json");
+            var schemaContent = await schemaFile.ReadToEndAsync();
+            return Ok(schemaContent);
+        }
+
+        [HttpGet]
         [Route(CustomerRoutes.CustomerResourceCollection)]
         public async Task<IActionResult> GetCustomerResourceCollection()
         {

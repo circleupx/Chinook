@@ -1,14 +1,14 @@
 ﻿using Chinook.Core;
 using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
-using Chinook.Core.ServiceModels;
 using Chinook.Infrastructure.Commands;
-using JsonApiFramework;
+using JsonApiFramework.Http;
 using JsonApiFramework.JsonApi;
 using JsonApiFramework.Server;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace Chinook.Web.Resources
@@ -30,6 +30,7 @@ namespace Chinook.Web.Resources
         {
             var customerResourceCollection = await _mediator.Send(new GetCustomerResourceCollectionCommand());
             var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var linktToCustomerJsonSchema = CreateLinkToCustomerSchemas(currentRequestUri);
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -38,6 +39,7 @@ namespace Chinook.Web.Resources
                     .Links()
                         .AddSelfLink()
                         .AddUpLink()
+                        .AddLink(JsonApiKeyWords.DescribedBy, linktToCustomerJsonSchema)
                     .LinksEnd()
                     .ResourceCollection(customerResourceCollection)
                         .Relationships()
@@ -133,6 +135,21 @@ namespace Chinook.Web.Resources
 
             _logger.LogInformation("Request for {URL} generated JSON:API document {doc}", currentRequestUri, document);
             return document;
+        }
+
+        private static Link CreateLinkToCustomerSchemas(Uri currentRequestUrl)
+        {
+            var scheme = currentRequestUrl.Scheme;
+            var host = currentRequestUrl.Host;
+            var port = currentRequestUrl.Port;
+
+            var urlBuilderConfiguration = new UrlBuilderConfiguration(scheme, host, port);
+            var uriToCustomerSchemas = UrlBuilder.Create(urlBuilderConfiguration)
+                                                       .Path("customers")
+                                                       .Path("schemas")
+                                                       .Build();
+            var linkToCustomerSchemas = new Link(uriToCustomerSchemas);
+            return linkToCustomerSchemas;
         }
     }
 }
