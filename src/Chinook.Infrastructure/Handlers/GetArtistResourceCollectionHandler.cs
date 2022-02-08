@@ -1,5 +1,5 @@
 ﻿using Chinook.Core.Extensions;
-using Chinook.Core.ServiceModels;
+using Chinook.Core.Models;
 using Chinook.Infrastructure.Commands;
 using Chinook.Infrastructure.Database;
 using MediatR;

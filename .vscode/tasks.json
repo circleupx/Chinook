@@ -1,0 +1,176 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build Chinook.Core Unit Test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/test/Chinook.Core.Test/Chinook.Core.UnitTest.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build Chinook.Infrastructure Unit Test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/test/Chinook.Infrastructure.Test/Chinook.Infrastructure.UnitTest.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build Chinook.Web Unit Test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/test/Chinook.Web.Test/Chinook.Web.UnitTest.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build Chinook.Web",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Chinook.Web/Chinook.Web.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build Chinook.Core",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Chinook.Core/Chinook.Core.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build Chinook.Infrastructure",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Chinook.Infrastructure/Chinook.Infrastructure.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish Chinook.Web",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/Chinook.Web/Chinook.Web.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch Chinook.Web",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/src/Chinook.Web/Chinook.Web.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test Chinook.Core",
+            "command": "dotnet",
+            "type": "process",
+            "group": "test",
+            "args": [
+                "test",
+                "--collect:\"XPlat Code Coverage\"",
+                "${workspaceFolder}/test/Chinook.Core.Test/Chinook.Core.UnitTest.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "dependsOn": [
+                "build Chinook.Core"
+            ]
+        },
+        {
+            "label": "test Chinook.Web",
+            "command": "dotnet",
+            "type": "process",
+            "group": "test",
+            "args": [
+                "test",
+                "--collect:\"XPlat Code Coverage\"",
+                "${workspaceFolder}/test/Chinook.Web.Test/Chinook.Web.UnitTest.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "dependsOn": [
+                "build Chinook.Web"
+            ]
+        },
+        {
+            "label": "test Chinook.Infrastructure",
+            "command": "dotnet",
+            "type": "process",
+            "group": "test",
+            "args": [
+                "test",
+                "--collect:\"XPlat Code Coverage\"",
+                "${workspaceFolder}/test/Chinook.Infrastructure.Test/Chinook.Infrastructure.UnitTest.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "dependsOn": [
+                "build Chinook.Infrastructure"
+            ]
+        },
+        {
+            "label": "Run Tests",
+            "dependsOn": [
+                "test Chinook.Infrastructure",
+                "test Chinook.Web",
+                "test Chinook.Core"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build Solution",
+            "dependsOn": [
+                "build Chinook.Infrastructure",
+                "build Chinook.Web",
+                "build Chinook.Core",
+                "build Chinook.Core Unit Test",
+                "build Chinook.Web Unit Test",
+                "build Chinook.Infrastructure Unit Test"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

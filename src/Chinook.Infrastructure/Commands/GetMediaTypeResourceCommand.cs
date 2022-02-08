@@ -1,4 +1,4 @@
-﻿using Chinook.Core.ServiceModels;
+﻿using Chinook.Core.Models;
 using MediatR;
 
 namespace Chinook.Infrastructure.Commands
