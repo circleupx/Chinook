@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Chinook.Core\Chinook.Core.csproj" />
+    <ProjectReference Include="..\..\src\Chinook.Infrastructure\Chinook.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>
