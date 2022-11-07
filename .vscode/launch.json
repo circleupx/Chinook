@@ -14,8 +14,8 @@
             "internalConsoleOptions": "openOnSessionStart",
             "serverReadyAction": {
                 "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+https?://\\S",
-                "uriFormat": "https://localhost:5001"
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s/swagger"
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
