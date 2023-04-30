@@ -1,4 +1,5 @@
 ﻿using Chinook.Web.Test.ApplicationFactory;
+using Chinook.Web.UnitTest;
 using FluentAssertions;
 using System.Net;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using Xunit;
 
 namespace Chinook.Web.Test
 {
-    public class HomeControllerIntegrationTest : IClassFixture<CustomWebApplicationFactory>
+    public class HomeControllerIntegrationTest : SqlServerContainerImage,  IClassFixture<CustomWebApplicationFactory>
     {
         private readonly CustomWebApplicationFactory _customWebApplicationFactory;
 
@@ -27,7 +28,7 @@ namespace Chinook.Web.Test
 
             // Assert 
             var responseCode = sut.StatusCode;
-            responseCode.Should().BeEquivalentTo(HttpStatusCode.OK);
+            responseCode.Should().Be(HttpStatusCode.OK);
         } 
     }
 }
