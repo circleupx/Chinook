@@ -58,7 +58,7 @@ namespace Chinook
             });
 
             // Auto Registration of Handlers using Assembly Scans.
-            services.AddMediatR(typeof(GetAlbumResourceCollectionHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAlbumResourceCollectionHandler).GetTypeInfo().Assembly));
             services.AddHttpContextAccessor();
             services.AddControllers()
                 .AddNewtonsoftJson();
