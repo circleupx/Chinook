@@ -27,7 +27,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetPlaylistResourceCollection()
         {
             var playlistResourceCollection = await _mediator.Send(new GetPlaylistResourceCollectionCommand());
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -51,7 +51,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetPlaylistResource(int resourceId)
         {
             var playlistResource = await _mediator.Send(new GetPlaylistResourceCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext

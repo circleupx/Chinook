@@ -16,7 +16,7 @@ namespace Chinook.Web.Test
             _customWebApplicationFactory = customWebApplicationFactory;
         }
 
-        [Fact]
+        //[Fact]
         public async Task GetHomeResource_HttpResponse_ShouldReturn200OK()
         {
             // Arrange

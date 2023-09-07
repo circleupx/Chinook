@@ -28,7 +28,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetInvoiceItemResourceCollection()
         {
             var invoiceItemResourceCollection = await _mediator.Send(new GetInvoiceItemResourceCollectionCommand());
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -56,7 +56,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetInvoiceItemResource(int resourceId)
         {
             var invoiceItemResource = await _mediator.Send(new GetInvoiceItemResourceCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -84,7 +84,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetInvoiceItemResourceToInvoiceResource(int resourceId)
         {
             var invoiceResource = await _mediator.Send(new GetInvoiceItemResourceToInvoiceResourceCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -111,7 +111,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetInvoiceItemResourceToTrackResource(int resourceId)
         {
             var trackResource = await _mediator.Send(new GetInvoiceItemResourceToTrackResourceCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext

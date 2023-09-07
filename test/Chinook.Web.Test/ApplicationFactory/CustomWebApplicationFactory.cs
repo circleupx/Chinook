@@ -47,7 +47,6 @@ namespace Chinook.Web.Test.ApplicationFactory
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

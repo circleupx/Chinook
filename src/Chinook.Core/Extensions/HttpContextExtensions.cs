@@ -1,25 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using System;
 
 namespace Chinook.Core.Extensions
 {
     public static class HttpContextExtensions
     {
-        public static Uri GetCurrentRequestUri(this HttpContext httpContext)
+        public static Uri GetRequestUri(this HttpContext httpContext)
         {
-            var currentRequest = httpContext.Request;
-
-            var currentRequestUriBuilder = new UriBuilder
-            {
-                Scheme = currentRequest.Scheme,
-                Host = currentRequest.Host.Host,
-                Port = currentRequest.Host.Port.GetValueOrDefault(),
-                Path = currentRequest.Path.Value,
-                Query = currentRequest.QueryString.ToUriComponent()
-            };
-
-            var currentRequestUri = currentRequestUriBuilder.Uri;
-            return currentRequestUri;
+            var currentRequestUri = httpContext.Request.GetDisplayUrl();
+            return new Uri(currentRequestUri);
         }
     }
 }

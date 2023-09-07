@@ -27,7 +27,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetEmployeeResourceCollection()
         {
             var employeeResourceCollection = await _mediator.Send(new GetEmployeeResourceCollectionCommand());
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -51,7 +51,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetEmployeeResource(int resourceId)
         {
             var employeeResource = await _mediator.Send(new GetEmployeeResourceCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext

@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build Chinook.Core Unit Test",
+            "label": "Build Chinook.Core Unit Test",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -11,10 +11,11 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "hide": true
         },
         {
-            "label": "build Chinook.Infrastructure Unit Test",
+            "label": "Build Chinook.Infrastructure Unit Test",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -23,10 +24,11 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "hide": true
         },
         {
-            "label": "build Chinook.Web Unit Test",
+            "label": "Build Chinook.Web Unit Test",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -35,10 +37,11 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "hide": true
         },
         {
-            "label": "build Chinook.Web",
+            "label": "Build Chinook.Web",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -47,10 +50,11 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "hide": true
         },
         {
-            "label": "build Chinook.Core",
+            "label": "Build Chinook.Core",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -59,22 +63,24 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "hide": true
         },
         {
-            "label": "build Chinook.Infrastructure",
+            "label": "Build Chinook.Infrastructure",
             "command": "dotnet",
             "type": "process",
             "args": [
-                "build",
+                "Build",
                 "${workspaceFolder}/src/Chinook.Infrastructure/Chinook.Infrastructure.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "hide": true
         },
         {
-            "label": "publish Chinook.Web",
+            "label": "Publish Web API",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -86,7 +92,7 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "watch Chinook.Web",
+            "label": "Watch Chinook.Web",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -99,7 +105,7 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "test Chinook.Core",
+            "label": "Test Chinook.Core",
             "command": "dotnet",
             "type": "process",
             "group": "test",
@@ -111,10 +117,11 @@
             "problemMatcher": "$msCompile",
             "dependsOn": [
                 "build Chinook.Core"
-            ]
+            ],
+            "hide": true
         },
         {
-            "label": "test Chinook.Web",
+            "label": "Test Chinook.Web",
             "command": "dotnet",
             "type": "process",
             "group": "test",
@@ -126,10 +133,11 @@
             "problemMatcher": "$msCompile",
             "dependsOn": [
                 "build Chinook.Web"
-            ]
+            ],
+            "hide": true
         },
         {
-            "label": "test Chinook.Infrastructure",
+            "label": "Test Chinook.Infrastructure",
             "command": "dotnet",
             "type": "process",
             "group": "test",
@@ -140,15 +148,16 @@
             ],
             "problemMatcher": "$msCompile",
             "dependsOn": [
-                "build Chinook.Infrastructure"
-            ]
+                "Build Chinook.Infrastructure"
+            ],
+            "hide": true
         },
         {
             "label": "Run Tests",
             "dependsOn": [
-                "test Chinook.Infrastructure",
-                "test Chinook.Web",
-                "test Chinook.Core"
+                "Test Chinook.Infrastructure",
+                "Test Chinook.Web",
+                "Test Chinook.Core"
             ],
             "problemMatcher": [],
             "group": {
@@ -157,15 +166,14 @@
             }
         },
         {
-            "label": "Build Solution",
+            "label": "Run Build",
             "dependsOn": [
-                "build Chinook.Infrastructure",
-                "build Chinook.Web",
-                "build Chinook.Core",
-                "build Chinook.Core Unit Test",
-                "build Chinook.Web Unit Test",
-                "build Chinook.Infrastructure Unit Test"
+                "Build Chinook.Web",
+                "Build Chinook.Core Unit Test",
+                "Build Chinook.Web Unit Test",
+                "Build Chinook.Infrastructure Unit Test"
             ],
+            "dependsOrder": "sequence",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

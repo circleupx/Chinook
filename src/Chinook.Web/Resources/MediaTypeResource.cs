@@ -28,7 +28,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetMediaTypeResourceCollection()
         {
             var mediaTypeResourceCollection = await _mediator.Send(new GetMediaTypeResourceCollectionCommand());
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -55,7 +55,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetMediaTypeResource(int resourceId)
         {
             var mediaTypeResource = await _mediator.Send(new GetMediaTypeResourceCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -82,7 +82,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetMediaTypeResourceToTrackResourceCollection(int resourceId)
         {
             var trackReourceCollection = await _mediator.Send(new GetMediaTypeResourceToTrackResourceCollectionCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext

@@ -28,7 +28,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetArtistResourceCollection()
         {
             var artistResourceCollection = await _mediator.Send(new GetArtistResourceCollectionCommand());
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -55,7 +55,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetArtistResource(int resourceId)
         {
             var artistResource = await _mediator.Send(new GetArtistResourceCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -82,7 +82,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetArtistResourceToAlbumResourceCollection(int resourceId)
         {
             var albumResourceCollection = await _mediator.Send(new GetArtistResourceToAlbumResourceCollectionCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext

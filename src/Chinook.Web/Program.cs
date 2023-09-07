@@ -1,75 +1,52 @@
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+using Chinook.Web;
 using Serilog;
-using System;
-using System.IO;
 
-namespace Chinook
+// Bootstrap Serilog to capture host build errors.
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+
+try
 {
-    public class Program
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Configuration.AddJsonFile("appsettings.json", false, true);
+    builder.Configuration.AddJsonFile($"appsettings{builder.Environment}.json", true, true);
+    builder.Configuration.AddEnvironmentVariables();
+    builder.Configuration.AddCommandLine(args);
+
+    builder.Host.ConfigureLogging(loggingBuilder => 
     {
-        public static readonly string AppName = "Chinook";
+        loggingBuilder.ClearProviders();
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .WriteTo.Console()
+            .CreateLogger();
+    });
+    builder.Host.UseSerilog();
 
-        public static int Main(string[] args)
-        {
-            var configuration = GetConfiguration();
-            Log.Logger = CreateSerilogLogger(configuration);
+    builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddServiceExtensions(builder.Configuration);
 
-            try
-            {
-                Log.Information("Configuring web host ({ApplicationContext})...", AppName);
-                var hostBuilder = CreateWebHostBuilder(args);
+    var app = builder.Build();
 
-                Log.Information("Starting web host ({ApplicationContext})...", AppName);
-                var host = hostBuilder.Build();
-                host.Run();
+    app.UseAppExtensions();
+    app.UseStaticFiles();
+    app.UseHttpsRedirection();
+    app.UseRouting();
+    app.UseAuthorization();
+    app.UseResponseCompression();
+    app.MapControllers();
 
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Program terminated unexpectedly ({ApplicationContext})!", AppName);
-                return 1;
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
-        }
-
-        private static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        {
-            var configuration = GetConfiguration();
-            var webHost = WebHost.CreateDefaultBuilder(args)
-                .CaptureStartupErrors(false)
-                .ConfigureAppConfiguration(x => x.AddConfiguration(configuration))
-                .UseStartup<Startup>()
-                .UseSerilog();
-
-            return webHost;
-        }
-
-        private static ILogger CreateSerilogLogger(IConfiguration configuration)
-        {
-            var cfg = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .Enrich.WithProperty("ApplicationContext", AppName)
-                .Enrich.FromLogContext()
-                .WriteTo.Console();
-            
-            return cfg.CreateLogger();
-        }
-
-        private static IConfiguration GetConfiguration()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
-
-            return builder.Build();
-        }
-    }
+    await app.RunAsync();
 }
+catch (Exception exception)
+{
+    Log.Fatal(exception, "Host build error encountered, please check configurations.");
+}
+finally
+{
+    await Log.CloseAndFlushAsync();
+}
+
+public partial class Program { }

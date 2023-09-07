@@ -9,7 +9,6 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Chinook.Web.Resources
@@ -33,7 +32,7 @@ namespace Chinook.Web.Resources
             _mediator = mediator;
             _uriQueryParametersReader = uriQueryParametersReader;
             _uriQueryParametersWriter = uriQueryParametersWritery;
-            _currentRequestUri = httpContextAccessor.HttpContext.GetCurrentRequestUri(); ;
+            _currentRequestUri = httpContextAccessor.HttpContext.GetRequestUri();
         }
 
         public async Task<Document> GetCustomerResourceCollection()

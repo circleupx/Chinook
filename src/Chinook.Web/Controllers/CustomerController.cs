@@ -1,6 +1,7 @@
 ﻿using Chinook.Core.Interfaces;
 using Chinook.Web.Routes;
 using JsonApiFramework.JsonApi;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

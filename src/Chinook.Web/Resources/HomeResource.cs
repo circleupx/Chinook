@@ -29,7 +29,7 @@ namespace Chinook.Web.Resources
                 Message = "Chinook Sample JSON:API Project"
             };
 
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             var scheme = currentRequestUri.Scheme;
             var host = currentRequestUri.Host;

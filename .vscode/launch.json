@@ -2,11 +2,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Debugger with Chrome",
+            "name": "Launch Debugger",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "Build Solution",
-            "program": "${workspaceFolder}/src/Chinook.Web/bin/Debug/net6.0/Chinook.Web.dll",
+            "preLaunchTask": "Run Build",
+            "program": "${workspaceFolder}/src/Chinook.Web/bin/Debug/net7.0/Chinook.Web.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Chinook.Web",
             "stopAtEntry": false,

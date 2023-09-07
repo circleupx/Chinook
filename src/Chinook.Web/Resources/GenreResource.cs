@@ -28,7 +28,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetGenreResourceCollection()
         {
             var genreResourceCollection = await _mediator.Send(new GetGenreResourceCollectionCommand());
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -55,7 +55,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetGenreResource(int resourceId)
         {
             var genreResource = await _mediator.Send(new GetGenreResourceCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
@@ -82,7 +82,7 @@ namespace Chinook.Web.Resources
         public async Task<Document> GetGenreResourceToTrackResourceCollection(int resourceId)
         {
             var trackResourceCollection = await _mediator.Send(new GetGenreResourceToTrackResourceCollectionCommand(resourceId));
-            var currentRequestUri = _httpContextAccessor.HttpContext.GetCurrentRequestUri();
+            var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);
             var document = chinookDocumentContext
