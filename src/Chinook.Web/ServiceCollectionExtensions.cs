@@ -1,6 +1,6 @@
 using Chinook.Core.Extensions;
 using Chinook.Core.Interfaces;
-using Chinook.Infrastructure.Database;
+using Chinook.Infrastructure;
 using Chinook.Infrastructure.Handlers;
 using Chinook.Web.Resources;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -11,9 +11,9 @@ namespace Chinook.Web
     {
         public static IServiceCollection AddServiceExtensions(this IServiceCollection services, IConfiguration configuration)
         {
-            var pageConfigurationSettings = configuration.Get<PageConfigurationSettings>();
-            services.AddSingleton(pageConfigurationSettings);
+           
             services.AddSingleton<HomeResource>();
+            
             services.AddTransient<ITrackResource, TrackResource>();
             services.AddTransient<IPlaylistResource, PlaylistResource>();
             services.AddTransient<IMediaTypeResource, MediaTypeResource>();
@@ -23,8 +23,9 @@ namespace Chinook.Web
             services.AddTransient<IEmployeeResource, EmployeeResource>();
             services.AddTransient<IArtistResource, ArtistResource>();
             services.AddTransient<IAlbumResource, AlbumResource>();
-            services.AddTransient<ICustomerResource, CustomerResource>();
-            services.AddTransient<CustomerQuerySpecification>();
+            //services.AddTransient<ICustomerResource, CustomerResource>();
+            //services.AddTransient<CustomerQuerySpecification>();
+            
             services.AddDbContext<ChinookDbContext>();
 
 
@@ -41,15 +42,14 @@ namespace Chinook.Web
 
             services.AddTransient(provider => {
                 var httpContextAccessor = provider.GetService<IHttpContextAccessor>();
-                var requestUri = httpContextAccessor?.HttpContext.GetRequestUri();
+                var requestUri = httpContextAccessor!.HttpContext.GetRequestUri();
                 return new UriQueryParametersWriter(requestUri);
             });
             
             services.AddTransient(provider => {
-                var pageAppSettings = provider.GetService<PageConfigurationSettings>();
                 var httpContextAccessor = provider.GetService<IHttpContextAccessor>();
-                var requestUri = httpContextAccessor?.HttpContext.GetRequestUri();
-                return new UriQueryParametersReader(requestUri, pageAppSettings);
+                var requestUri = httpContextAccessor!.HttpContext.GetRequestUri();
+                return new UriQueryParametersReader(requestUri);
             });
 
             // Auto Registration of Handlers using Assembly Scans.

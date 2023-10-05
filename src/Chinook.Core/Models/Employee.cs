@@ -7,7 +7,6 @@ namespace Chinook.Core.Models
         public Employee()
         {
             Customers = new HashSet<Customer>();
-            InverseReportsToNavigation = new HashSet<Employee>();
         }
 
         public long EmployeeId { get; set; }
@@ -26,8 +25,6 @@ namespace Chinook.Core.Models
         public string Fax { get; set; }
         public string Email { get; set; }
 
-        public virtual Employee ReportsToNavigation { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<Employee> InverseReportsToNavigation { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Chinook.Core.Extensions;
 using Chinook.Core.Models;
 using Chinook.Infrastructure.Commands;
-using Chinook.Infrastructure.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

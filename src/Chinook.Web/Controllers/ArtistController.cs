@@ -1,7 +1,6 @@
 ﻿using Chinook.Core.Interfaces;
 using Chinook.Web.Routes;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Chinook.Web.Controllers
 {

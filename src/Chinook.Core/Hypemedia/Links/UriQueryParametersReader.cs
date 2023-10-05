@@ -4,15 +4,11 @@ using JsonApiFramework.JsonApi;
 
 public class UriQueryParametersReader
 {
-    private Uri CurrentRequestUri;
     private QueryParameters CurrentRequestUriQueryParameters;
-    private PageConfigurationSettings PageConfigurationSettings;
 
-    public UriQueryParametersReader(Uri requestUri, PageConfigurationSettings pageConfigurationSettings)
+    public UriQueryParametersReader(Uri requestUri)
     {
-        CurrentRequestUri = requestUri;
         CurrentRequestUriQueryParameters = QueryParameters.Create(requestUri);
-        PageConfigurationSettings = pageConfigurationSettings;
     }
 
     public int GetPageNumberFromRequestUri()
@@ -27,7 +23,7 @@ public class UriQueryParametersReader
         }
         else
         {
-            return PageConfigurationSettings.PageConfiguration.DefaultNumber;
+            return 1;
         }
     }
 
@@ -43,7 +39,7 @@ public class UriQueryParametersReader
         }
         else
         {
-            return PageConfigurationSettings.PageConfiguration.DefaultSize;
+            return 50;
         }
     }
 

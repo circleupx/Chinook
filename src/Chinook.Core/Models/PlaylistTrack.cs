@@ -1,5 +1,8 @@
-﻿namespace Chinook.Core.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Chinook.Core.Models
 {
+    [Keyless]
     public class PlaylistTrack
     {
         public long PlaylistId { get; set; }

@@ -1,7 +1,6 @@
 ﻿using Chinook.Core;
 using Chinook.Core.Models;
 using Chinook.Infrastructure.Commands;
-using Chinook.Infrastructure.Database;
 using JsonApiFramework;
 using MediatR;
 using System.Threading;

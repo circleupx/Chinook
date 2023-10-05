@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Chinook.Core.Models
 {
@@ -12,6 +13,7 @@ namespace Chinook.Core.Models
         public long PlaylistId { get; set; }
         public string Name { get; set; }
 
+        [NotMapped]
         public virtual ICollection<PlaylistTrack> PlaylistTrack { get; set; }
     }
 }

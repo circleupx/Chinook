@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LinqKit" Version="1.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Chinook.Core\Chinook.Core.csproj" />
   </ItemGroup>
 

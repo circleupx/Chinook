@@ -2,13 +2,11 @@
 using Chinook.Core.Constants;
 using Chinook.Core.Extensions;
 using Chinook.Core.Interfaces;
+using Chinook.Core.Models;
 using Chinook.Infrastructure.Commands;
 using JsonApiFramework.JsonApi;
 using JsonApiFramework.Server;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
 namespace Chinook.Web.Resources
 {
@@ -27,7 +25,15 @@ namespace Chinook.Web.Resources
 
         public async Task<Document> GetAlbumResourceCollection()
         {
-            var albumResourceCollection = await _mediator.Send(new GetAlbumResourceCollectionCommand());
+            var displayUrl = _httpContextAccessor.HttpContext.GetRequestUri();
+            var resource = ResourceQueryBuilder
+            .NewResourceQuerySpecification(displayUrl)
+                .StartFilter()
+                    .AddFilter<Album>()
+                .EndFilter()
+            .BuildSpecification();
+            
+            var albumResourceCollection = await _mediator.Send(new GetAlbumResourceCollectionCommand(resource));
             var currentRequestUri = _httpContextAccessor.HttpContext.GetRequestUri();
 
             using var chinookDocumentContext = new ChinookJsonApiDocumentContext(currentRequestUri);

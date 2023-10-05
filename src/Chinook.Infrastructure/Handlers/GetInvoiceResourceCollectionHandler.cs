@@ -1,10 +1,12 @@
 ﻿using Chinook.Core.Extensions;
 using Chinook.Core.Models;
 using Chinook.Infrastructure.Commands;
-using Chinook.Infrastructure.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,9 +23,22 @@ namespace Chinook.Infrastructure.Handlers
 
         public async Task<IEnumerable<Invoice>> Handle(GetInvoiceResourceCollectionCommand request, CancellationToken cancellationToken)
         {
-            return await _chinookDbContext.Invoices
+            Expression<Func<Invoice, bool>> invoiceFilter = request.querySpecification.GetFilter<Invoice>(nameof(Invoice));
+            Expression<Func<Customer, bool>> customerFilter = request.querySpecification.GetFilter<Customer>(nameof(Customer));
+
+            var invoiceQuery = _chinookDbContext.Invoices.Where(invoiceFilter);
+            var customerQuery = _chinookDbContext.Customers.Where(customerFilter);
+
+            var query =
+                from fi in invoiceQuery
+                join fc in customerQuery on fi.CustomerId equals fc.CustomerId
+                select fi;
+
+            var result = await query
                 .TagWithSource()
-                .ToListAsync(cancellationToken);
+                .ToListAsync();
+
+            return result;
         }
     }
 }
